@@ -1,3 +1,5 @@
+//判断是否在微信浏览其中
+if(myUtils.isWeiXinBrowse()){
 //微信授权登录
   if(!sessionStorage.getItem("weixinlogin")){
 	  sessionStorage.setItem("weixinlogin",1);
@@ -108,3 +110,5 @@
 			}); 
 	 						});
 		});
+
+}

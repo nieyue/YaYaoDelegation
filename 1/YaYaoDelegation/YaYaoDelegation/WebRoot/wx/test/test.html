@@ -25,7 +25,7 @@
 			<a id="queryRefund" class="btn btn-block btn-danger" href="#">查询微信退款订单</a>
 			<a id="qrcode2" class="btn btn-block btn-danger" href="#">点击扫码</a>
 			<div id="qrcode2Div"  href="#">
-				<img alt="" class="img-thumbnail" ng-src="{{qrcode2Img}}">
+				<img class="img-thumbnail" style="width:200px;height:200px;border:1px solid red;" ng-src="{{qrcode2Img}}">
 			</div>
 	</div>
 	<script src="/resources/js/jquery2.1.js"></script>
@@ -66,8 +66,9 @@
 		$("#qrcode2").click(function(){
 			//alert("sdf")
 			$.post("/weixin/qrcode2/22",function(data){
-				data=JSON.stringify(data);
+				data=JSON.parse(data);
 				$scope.qrcode2Img=data.code_img;
+				$scope.$apply();
 			});
 		});
 		

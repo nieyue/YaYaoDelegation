@@ -30,8 +30,12 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.net.URL;
 import java.security.KeyStore;
+import java.security.SecureRandom;
 
+import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.KeyManagerFactory;
 import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSocketFactory;
 
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.apache.http.conn.ssl.SSLContexts;
@@ -60,7 +64,6 @@ public class ClientCustomSSL {
         } finally {
             instream.close();
         }
-
         // Trust own CA and all self-signed certs
         @SuppressWarnings("deprecation")
 		SSLContext sslcontext = SSLContexts.custom()
@@ -78,8 +81,6 @@ public class ClientCustomSSL {
                 .build();
         return httpclient;
 	}
-	
-	
 	
     public final static void main(String[] args) throws Exception {
     	//File file = new File(System.getProperty("user.dir")+"/src/com/nieyue/weixin/ssl/apiclient_cert.p12");

@@ -29,6 +29,24 @@ var myUtils = {
 		password:/^[0-9_a-zA-Z]{6,20}$/ // 数字、字母、下划线，6-20长度
 	},
 	/**
+	 * 是否微信浏览器
+	 * return true 是
+	 * return false 否
+	 */
+	isWeiXinBrowse:function(){
+		if(navigator.userAgent.match(/MicroMessenger/)[0]==='MicroMessenger'){
+			return true;
+		}
+		return false;
+	},
+	/**
+	 * 检查微信浏览器版本
+	 * return 
+	 */
+	weiXinBrowseVersion:function(){
+		return navigator.userAgent.match(/MicroMessenger\/([\d\.]+)/)[1]);
+	},
+	/**
 	 * 微信支付
 	 * 
 	 */
