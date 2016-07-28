@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>商品详情页</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport"
+	content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+	<meta name="keywords" content="本真,茶艺,茶叶,绿茶,红茶,黑茶,花茶,黄茶,青茶">
+<meta charset="UTF-8">
+<meta name="description"
+	content="欢迎关注本真茶园，优购好茶、品读茶艺，专注于茶的奥秘，也许您的精彩如同茶道需要用心去品味，本真茶园邀请您来喝茶，分享茶的感悟。 好茶才能品茗悟道，懂茶没那么难，我们愿与您分享茶艺的精彩。">
+<link href="/resources/css/bootstrap.min.css" rel="stylesheet">
+<link href="/resources/css/base.css" rel="stylesheet">
+<style type="text/css">
+.ng-hide{
+ height: 0;
+  width: 0;
+  background-color: fuchsia;
+  left:50%;
+}
+</style>
+</head>
+
+<body ng-app="merDetailsApp">
+	<div ng-controller="merDetailsCtrl" class="comment-wrap">
+				<!-- 详情展示 -->
+				<div class="thumbnail" style="padding:0;">
+					<img ng-src="{{currentMerchandise.merchandise_thumb_img}}">
+					<div class="caption">
+						<div ><span ng-bind="currentMerchandise.merchandise_title"></span></div>
+						<div ><span ng-bind="currentMerchandise.merchandise_content" class="text-muted"></span></div>
+					 <div class="row">
+						<div class="col-xs-9 ">
+							<div class="text-danger">￥<span ng-bind="currentMerchandise.merchandise_price||'0.00'"></span> <span class="label label-danger"><span ng-bind="currentMerchandise.merchandise_person||0"></span>人拼团价</span></div>
+							<div class="text-muted">价格 ￥<span ng-bind="currentMerchandise.merchandise_oldsprice||0"></span> 已出售：<span ng-bind="currentMerchandise.merchandise_sold||0"></span>件</div>
+						</div>
+						<div class="col-xs-3 text-center" style="border-left:1px solid #ccc">
+							<div class="text-danger" ><span ng-bind="leader.commission||'0.00'"></span>%</div>
+							<div class="text-muted" >团长佣金</div>
+						</div>
+					</div>
+					</div>
+				</div>
+				<!-- 详情展示end -->
+				<!-- 按钮-->
+				<div class="row">
+					<button class="col-xs-offset-1 col-xs-5 btn btn-danger btn-lg" ng-click="currentMerchandiseOpenGroup()">我要开团</button>
+					<button class="col-xs-offset-1 col-xs-4 btn btn-success btn-lg" ng-click="currentMerchandiseJoinGroup()">直接参团</button>
+				</div>
+				<!-- 按钮end-->
+				<!-- 商品图片列表-->
+				<div class="comment-list-item text-center">
+					<a ng-click="currentMerchandiseImgs()">点击加载图文详情</a>
+				</div>
+				<!-- 商品图片列表end-->
+				<!-- 收货地址-->
+				<div class="comment-bottom-fixed comment-receipt-address hide" id="receiptAddress" ng-hide="receiptAddress">
+					<form  class="container" novalidate name="receiptAddressForm" ng-submit="receiptAddressFormSubmit()">
+						<div class="form-group text-center">
+						</div>
+						<div class="form-group text-center">
+							参团支付
+						</div>
+  						<div class="form-group  has-feedback" ng-class="{'has-success':receiptAddressForm.addressName.$valid,'has-error':receiptAddressForm.addressName.$invalid && receiptAddressForm.addressName.$touched}">
+    					<div class="input-group">
+     				    <div class="input-group-addon">姓名</div>
+      						<input type="text" class="form-control" name="addressName"  placeholder="输入姓名2-16位"
+      						ng-model="addressdata.addressName"  required ng-pattern="/(^[\u4E00-\u9FA5]{2,16}$)|(^[a-zA-Z\/ ]{2,16}$)/">
+      						<span ng-class="{'glyphicon glyphicon-ok form-control-feedback':receiptAddressForm.addressName.$valid,'glyphicon glyphicon-remove form-control-feedback':receiptAddressForm.addressName.$invalid&&receiptAddressForm.addressName.$touched}"></span>
+    					</div>
+  						</div>
+    					<div class="form-group  has-feedback" ng-class="{'has-success':receiptAddressForm.addressPhone.$valid,'has-error':receiptAddressForm.addressPhone.$invalid && receiptAddressForm.addressPhone.$touched}">
+    					<div class="input-group">
+     				    <div class="input-group-addon">手机</div>
+      						<input type="tel" class="form-control" name="addressPhone" placeholder="输入手机号码" required ng-model="addressdata.addressPhone" ng-pattern="/^(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/">
+      						<span ng-class="{'glyphicon glyphicon-ok form-control-feedback':receiptAddressForm.addressPhone.$valid,'glyphicon glyphicon-remove form-control-feedback':receiptAddressForm.addressPhone.$invalid&&receiptAddressForm.addressPhone.$touched}"></span>
+    					</div>
+    					</div>
+    					<div class="form-group">
+    					<div class="input-group row">
+     				    <div class="input-group-addon">省市区</div>
+      						<select class="form-control"  id="sheng" name="province" ng-model="addressdata.province">
+					 			<!--  <option >广东</option> --> 
+							</select>
+							<select class="form-control" id="shi" name="city"  ng-model="addressdata.city">
+		 						<!-- <option >广州</option>  -->
+							</select>
+							<select class="form-control" id="xian" name="country" ng-model="addressdata.country">
+								<!-- <option >天河</option> -->
+							</select>
+		 					 <select class="form-control" id="xiang" name="street"> 
+			 				<!-- <option >--</option> -->
+								
+							</select>
+    					</div>
+    					</div>
+    					<div class="form-group has-feedback" ng-class="{'has-success':receiptAddressForm.addressDetails.$valid,'has-error':receiptAddressForm.addressDetails.$invalid && receiptAddressForm.addressDetails.$touched}">
+    					<div class="input-group">
+     				    <div class="input-group-addon">街道地址</div>
+      						<input type="text" class="form-control" name="addressDetails" placeholder="街道地址" required ng-model="addressdata.addressDetails" >
+    						<span ng-class="{'glyphicon glyphicon-ok form-control-feedback':receiptAddressForm.addressDetails.$valid,'glyphicon glyphicon-remove form-control-feedback':receiptAddressForm.addressDetails.$invalid&&receiptAddressForm.addressDetails.$touched}"></span>
+    					</div>
+    					</div>
+    					<div class="form-group">
+    					<label class="control-label text-danger">支付金额：￥<span ng-bind="currentMerchandise.merchandise_price||'0.00'"></span></label>
+  						<button type="submit" class="btn btn-danger" ng-disabled="receiptAddressForm.$invalid" >确认支付</button>
+    					</div>
+					</form>
+				</div>
+				<!-- 收货地址end-->
+				<!-- 遮罩-->
+				<div class="comment-full-screen hide" id="fullScreen" ng-hide="receiptAddress" ng-click="fullScreenHide()">
+				</div>
+				<!-- 遮罩end-->
+	</div>
+	<script src="/resources/js/jquery2.1.js"></script>
+	<script src="/resources/js/bootstrap3.2.0.js"></script>
+	<script src="/resources/js/angularjs.min.1.5.7.js"></script>
+	<script src="/resources/js/angular-animate.min.js"></script>
+	<script src="/resources/js/GlobalProvinces_extend.js" ></script>
+    <script src="/resources/js/GlobalProvinces_main.js" ></script>
+    <script src="/resources/js/initLocation.js" ></script>
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+	<script src="/resources/js/base.js"></script>
+	<script src="/resources/js/weixinlogin.js"></script>
+	<script>
+			initLocation(
+					{sheng_val:"湖南",shi_val:"长沙",
+					xian_val:"长沙市"});
+		var merDetailsApp = angular.module('merDetailsApp', ['ngAnimate']);
+		merDetailsApp.controller('merDetailsCtrl', function($scope,$http) {
+			$scope.addressdata={
+					province:"湖南",
+					city:"长沙",
+					country:"长沙市"
+			};
+			$scope.$watch('myCheck', function(newValue, oldValue) {  
+			 	 console.log(newValue+ '===' +oldValue);  
+				console.log($scope.myCheck)
+			});
+			//当前商品数据
+			$scope.currentMerchandise={
+					merchandise_thumb_img:'/resources/sellerUpload/7/黑茶/百两茶/百两茶_01.jpg',
+        			merchandise_title:'惠茶，8人，团价24，佣金8%',
+        			merchandise_content:'是打发撒的发生的范德萨范德萨发的司法是打发撒的发生的范德萨范德萨发的司法是打发撒的发生的范德萨范德萨发的司法',
+        			merchandise_person:'5',
+        			merchandise_oldprice:'55.00',
+        			merchandise_price:'55.00',
+        			merchandise_stock:'22',
+        			merchandise_urlid:'#'
+        			}; 
+			//当前商品团长佣金
+			$scope.leader={
+				commission:'8.00'	
+			}; 
+			$scope.currentMerchandiseImgs=function(){
+				console.log(myUtils.GetQueryString("merchandise_id"));
+			};
+			$scope.currentMerchandiseJoinGroup=function(){
+				console.log(myUtils.GetQueryString("merchandise_id"));
+				location.replace("/wx/join_group_list?merchandise_id="+myUtils.GetQueryString("merchandise_id"));
+			};
+			//打开收货地址
+			$scope.receiptAddress=true;
+			$scope.currentMerchandiseOpenGroup=function(){
+			$("#fullScreen").removeClass("hide");
+			$("#receiptAddress").removeClass("hide");
+				$scope.receiptAddress=!$scope.receiptAddress;
+				console.log(myUtils.GetQueryString("merchandise_id"));
+				//提交表单
+				$scope.receiptAddressFormSubmit=function(){
+					if($scope.receiptAddressForm.$valid){
+					myUtils.myPrevToast("支付中...", function(){
+						$scope.receiptAddressForm.$invalid=true;
+					 $http.get("/user/login?name=15111336587&password=123456")
+					    .success(function(data,status,config,header) {
+					    	$scope.receiptAddressForm.$invalid=false;
+					    	
+					    	myUtils.myPrevToast("支付完成", function(){
+					    		location.replace("/order")
+					    		}, "remove");
+					    	});
+					}, "add");
+					}
+				};
+				
+			};
+			//隐藏所有遮罩与收货地址
+			$scope.fullScreenHide=function(){
+				$scope.receiptAddress=true;
+			};
+		});
+	</script>
+</body>
+</html>

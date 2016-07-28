@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>我</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport"
+	content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+	<meta name="keywords" content="本真,茶艺,茶叶,绿茶,红茶,黑茶,花茶,黄茶,青茶">
+<meta charset="UTF-8">
+<meta name="description"
+	content="欢迎关注本真茶园，优购好茶、品读茶艺，专注于茶的奥秘，也许您的精彩如同茶道需要用心去品味，本真茶园邀请您来喝茶，分享茶的感悟。 好茶才能品茗悟道，懂茶没那么难，我们愿与您分享茶艺的精彩。">
+<link href="/resources/css/bootstrap.min.css" rel="stylesheet">
+<link href="/resources/css/base.css" rel="stylesheet">
+</head>
+
+<body ng-app="userApp">
+	<div ng-controller="userCtrl" class="comment-wrap">
+				<!-- 用户详情 -->
+					<ul class="list-group">
+  						<li class="list-group-item">Cras justo odio</li>
+  						<li class="list-group-item">Dapibus ac facilisis in</li>
+  						<li class="list-group-item">Morbi leo risus</li>
+  						<li class="list-group-item">Porta ac consectetur ac</li>
+  						<li class="list-group-item">Vestibulum at eros</li>
+					</ul>
+					<a href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx0cfdb598d619807e&redirect_uri=http://192.168.0.112:8080/user&response_type=code&scope=snsapi_base&state=200#wechat_redirect">微信登录</a>
+					<a ng-click="getCode()">获取code</a>
+					<a ng-href="{{accessToken}}">获取AccessToken</a>
+					<a ng-href="{{userInfo}}">获取用户信息userinfo</a>
+				<!-- 用户详情end -->
+		<!-- 导航 -->
+		<div class="row text-center comment-list-item comment-bottom-fixed">
+			<a class="col-xs-4" href="/wx/index">
+				<div class="glyphicon glyphicon-home">
+				</div>
+				<div>首页</div>
+			</a>
+			<a class="col-xs-4" href="/wx/order" >
+				<div class="glyphicon glyphicon-list-alt">
+				</div>
+				<div>订单</div>
+			</a>
+			<a class="col-xs-4" href="/wx/mygroup">
+				<div class="glyphicon glyphicon-list">
+				</div>
+				<div>我的团</div>
+			</a>
+			<!-- <a class="col-xs-3 text-danger" href="#">
+				<div class="glyphicon glyphicon-user">
+				</div>
+				<div>我</div>
+			</a> -->
+		</div>
+		<!-- 导航end -->
+	</div>
+	<script src="/resources/js/jquery2.1.js"></script>
+	<script src="/resources/js/bootstrap3.2.0.js"></script>
+	<script src="/resources/js/angularjs.min.1.5.7.js"></script>
+	<script src="/resources/js/angular-animate.min.js"></script>
+	<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+	<script src="/resources/js/base.js"></script>
+	<script src="/resources/js/weixinlogin.js"></script>
+	<script>
+		var userApp = angular.module('userApp', ['ngAnimate']);
+		userApp.controller('userCtrl', function($scope,$http) {
+			//当前用户数据
+			$scope.userInit={
+					
+        			}; 
+			$scope.getCode=function(){
+			var code=myUtils.GetQueryString("code");
+			$scope.accessToken="https://api.weixin.qq.com/sns/oauth2/access_token?appid=wx0cfdb598d619807e&secret=d4624c36b6795d1d99dcf0547af5443d&code="+code+"&grant_type=authorization_code";
+				/* $http({
+				method:'POST',
+				url:"https://api.weixin.qq.com/sns/oauth2/access_token?appid=wx0cfdb598d619807e&secret=d4624c36b6795d1d99dcf0547af5443d&code="+code+"&grant_type=authorization_code",
+				headers:{
+				'Content-Type': 'application/x-www-form-urlencoded'
+				}
+				}).success(function(data){
+				deferred.resolve(data);
+				alert(data)
+				}).error(function(data, status, headers, config) {
+				deferred.reject('Then was an error');
+				alert(data)
+				}); */
+			};
+			$scope.uuionid="oXg5CtzaqXBsqKbcVUqlp14Evn0c";
+			$scope.userInfo="https://api.weixin.qq.com/sns/userinfo?access_token=wx6k0LAki8zyrFDAUo2IwWKVv-pMAifNWbpVSpRlGl1U6DBHctOk79m3M1i5Nc4i98FKl8LgJs9R9BPM0jCGPGHSnEMJFBDmiWb7Kck7q2w&openid=ohzOyv0Kp4NHMfbluAmi53oJWBgk";
+		});
+	</script>
+</body>
+</html>

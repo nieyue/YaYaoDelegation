@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>我的团</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport"
+	content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+	<meta name="keywords" content="本真,茶艺,茶叶,绿茶,红茶,黑茶,花茶,黄茶,青茶">
+<meta charset="UTF-8">
+<meta name="description"
+	content="欢迎关注本真茶园，优购好茶、品读茶艺，专注于茶的奥秘，也许您的精彩如同茶道需要用心去品味，本真茶园邀请您来喝茶，分享茶的感悟。 好茶才能品茗悟道，懂茶没那么难，我们愿与您分享茶艺的精彩。">
+<link href="/resources/css/bootstrap.min.css" rel="stylesheet">
+<link href="/resources/css/base.css" rel="stylesheet">
+</head>
+
+<body ng-app="mygroupApp">
+	<div ng-controller="mygroupCtrl" class="comment-wrap">
+				<!-- 详情展示 -->
+				我的团
+				<!-- 详情展示end -->
+		<!-- 导航 -->
+		<div class="row text-center comment-list-item comment-bottom-fixed">
+			<a class="col-xs-4" href="/wx/index">
+				<div class="glyphicon glyphicon-home">
+				</div>
+				<div>首页</div>
+			</a>
+			<a class="col-xs-4" href="/wx/order">
+				<div class="glyphicon glyphicon-list-alt">
+				</div>
+				<div>订单</div>
+			</a>
+			<a class="col-xs-4 text-danger" href="#">
+				<div class="glyphicon glyphicon-list">
+				</div>
+				<div>我的团</div>
+			</a>
+			<!-- <a class="col-xs-3" href="/wx/user">
+				<div class="glyphicon glyphicon-user">
+				</div>
+				<div>我</div>
+			</a> -->
+		</div>
+		<!-- 导航end -->
+			
+	</div>
+	<script src="/resources/js/jquery2.1.js"></script>
+	<script src="/resources/js/bootstrap3.2.0.js"></script>
+	<script src="/resources/js/angularjs.min.1.5.7.js"></script>
+	<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+	<script src="/resources/js/base.js"></script>
+	<script src="/resources/js/weixinlogin.js"></script>
+	<script>
+		var mygroupApp = angular.module('mygroupApp', []);
+		mygroupApp.controller('mygroupCtrl', function($scope) {
+			//当前商品数据
+			$scope.currentMerchandise={
+					merchandise_img:'/resources/sellerUpload/7/黑茶/百两茶/百两茶_01.jpg',
+        			merchandise_title:'惠茶，8人，团价24，佣金8%',
+        			merchandise_person:'5',
+        			merchandise_oldprice:'55.00',
+        			merchandise_price:'55.00',
+        			merchandise_sold:'22',
+        			merchandise_urlid:'#'
+        			}; 
+			//当前商品团长佣金
+			$scope.leader={
+				commission:'8.00'	
+			}; 
+			$scope.currentMerchandiseImgs=function(){
+				console.log(myUtils.GetQueryString("merchandise_id"));
+			};
+			$scope.currentMerchandiseJoinGroup=function(){
+				console.log(myUtils.GetQueryString("merchandise_id"));
+			};
+			$scope.currentMerchandiseOpenGroup=function(){
+				console.log(myUtils.GetQueryString("merchandise_id"));
+			};
+		});
+	</script>
+</body>
+</html>

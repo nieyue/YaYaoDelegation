@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+<mapper namespace="com.nieyue.dao.ReceiptAddressDao">
+<!-- 新增收货地址-->
+<insert id="addReceiptAddress" parameterType="ReceiptAddress" flushCache="true" >  
+   INSERT IGNORE INTO
+   		 receipt_address_tb 
+   		 (receipt_address_name,receipt_address_phone,receipt_address_site,
+   		 <if test="receiptAddressUpdateTime!=null">receipt_address_update_time,</if>
+   		 <if test="isDefault!=null">is_default,</if>
+   		 user_id)
+   VALUES
+    	 (#{receiptAddressName},#{receiptAddressPhone},#{receiptAddressSite},
+   		 <if test="receiptAddressUpdateTime!=null">#{receiptAddressUpdateTime},</if>
+   		 <if test="isDefault!=null">#{isDefault},</if>
+    	 #{userId})  
+</insert>  
+<!-- 更新收货地址 -->
+<update id="updateReceiptAddress" parameterType="ReceiptAddress" >  
+    UPDATE 
+    	receipt_address_tb 
+    SET 
+    	receipt_address_name=#{receiptAddressName},
+    	receipt_address_phone=#{receiptAddressPhone},
+    	receipt_address_site=#{receiptAddressSite},
+    	receipt_address_update_time=#{receiptAddressUpdateTime},
+    	is_default=#{isDefault},
+    	user_id=#{userId}
+    WHERE
+    	 receipt_address_id=#{receiptAddressId}  
+</update> 
+<!-- 删除收货地址-->
+<delete id="delReceiptAddress"  parameterType="Integer" >  
+    DELETE FROM
+    	 receipt_address_tb WHERE receipt_address_id=#{receiptAddressId}
+</delete>  
+<!--装载收货地址-->
+<select id="loadReceiptAddress" parameterType="Integer" resultType="ReceiptAddress" >
+SELECT 
+	 receipt_address_id,
+	 receipt_address_name,
+     receipt_address_phone,
+     receipt_address_site,
+     receipt_address_update_time,
+     is_default,
+     user_id
+FROM receipt_address_tb 
+WHERE receipt_address_id=#{receiptAddressId}
+</select>
+<!-- 分页收货地址-->
+<select id="browsePagingReceiptAddress" resultType="ReceiptAddress">  
+    SELECT
+		 receipt_address_id,
+		 receipt_address_name,
+	     receipt_address_phone,
+	     receipt_address_site,
+	     receipt_address_update_time,
+	     is_default,
+	     user_id
+	FROM receipt_address_tb
+	ORDER BY
+		${orderName}  ${orderWay}
+	LIMIT
+		#{pageNum},#{pageSize}
+</select>
+<!-- 浏览收货地址-->
+<select id="browseReceiptAddress" resultType="ReceiptAddress">  
+    SELECT
+         receipt_address_id,
+		 receipt_address_name,
+	     receipt_address_phone,
+	     receipt_address_site,
+	     receipt_address_update_time,
+	     is_default,
+	     user_id 
+	FROM receipt_address_tb
+	ORDER BY
+		${orderName} ${orderWay}
+</select>    
+<!--  查询默认地址  -->
+<select id="loadDefaultReceiptAddress" parameterType="Integer" resultType="ReceiptAddress">  
+    SELECT
+       	 receipt_address_id,
+		 receipt_address_name,
+	     receipt_address_phone,
+	     receipt_address_site,
+	     receipt_address_update_time,
+	     is_default,
+	     user_id  
+	FROM receipt_address_tb
+	WHERE user_id=#{userId} AND is_default=#{isDefault}
+</select>      
+ 
+</mapper>

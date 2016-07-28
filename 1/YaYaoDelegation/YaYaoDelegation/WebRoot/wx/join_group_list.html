@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>本商品参团列表</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport"
+	content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+	<meta name="keywords" content="本真,茶艺,茶叶,绿茶,红茶,黑茶,花茶,黄茶,青茶">
+<meta charset="UTF-8">
+<meta name="description"
+	content="欢迎关注本真茶园，优购好茶、品读茶艺，专注于茶的奥秘，也许您的精彩如同茶道需要用心去品味，本真茶园邀请您来喝茶，分享茶的感悟。 好茶才能品茗悟道，懂茶没那么难，我们愿与您分享茶艺的精彩。">
+<link href="/resources/css/bootstrap.min.css" rel="stylesheet">
+<link href="/resources/css/base.css" rel="stylesheet">
+</head>
+
+<body ng-app="merJoinGroupApp">
+	<div ng-controller="merJoinGroupCtrl" class="comment-wrap">
+		<!-- 参团列表 -->
+		<div class="list-group media comment-list-item" ng-repeat="merJoinGroup in merJoinGroupList||merJoinGroupInit">
+			<div class="media-left">
+				<a href="#"> <img class="media-object img-rounded comment-list-item-img "
+					ng-src="{{merJoinGroup.merchandise.merchandise_thumb_img}}" >
+				</a>
+			</div>
+			<div class="media-body">
+				<div class="media-heading" ng-bind="merJoinGroup.merchandise.merchandise_title"></div>
+				<div class="pull-left">
+					<div class="text-danger"><span ng-bind="merchandise.merchandise_person||merchandiseInit.merchandise_person"></span>人拼团价：￥<span ng-bind="merchandise.merchandise_price||merchandiseInit.merchandise_price"></span></div>
+					<div class="text-muted">已出售：<span ng-bind="merchandise.merchandise_sold||merchandiseInit.merchandise_sold"></span>件</div>
+				</div>
+				<a class="pull-right btn btn-danger" ng-href="/wx/mer_details?merchandise_id={{merchandise.merchandise_urlid||merchandiseInit.merchandise_urlid}}">立即开团</a>
+			</div>
+		</div>
+		<!-- 参团列表end -->
+		
+	</div>
+	<script src="/resources/js/jquery2.1.js"></script>
+	<script src="/resources/js/bootstrap3.2.0.js"></script>
+	<script src="/resources/js/angularjs.min.1.5.7.js"></script>
+	<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+	<script src="/resources/js/base.js"></script>
+	<script src="/resources/js/weixinlogin.js"></script>
+	<script>
+    	var merJoinGroupApp=angular.module('merJoinGroupApp',[]);
+    	merJoinGroupApp.controller('merJoinGroupCtrl',function($scope){
+    		//本商品参团列表初始化
+    		$scope.merJoinGroupInit={};
+    		//本商品参团列表
+    		$scope.merJoinGroupList=[
+    		   {
+    			mer_group_id:1,
+    			merchandise:{
+    			merchandise_id:1;
+    		   	merchandise_thumb_img:'http://www.yayao8.com/resources/img/YaYaoQRCode.jpg',
+    			merchandise_title:'[日志信息]',
+    			merchandise_person:'3',
+    			merchandise_oldprice:'55.00',
+    			merchandise_price:'22.36',
+    			merchandise_stock:'54',
+    			merchandise_urlid:'1'	
+    			},
+    			mer_group_join_person:'2',//加入团的人
+    			},
+    		   {
+    			mer_group_id:2,
+    			merchandise:{
+    			merchandise_id:1;
+    		   	merchandise_thumb_img:'http://www.yayao8.com/resources/img/YaYaoQRCode.jpg',
+    			merchandise_title:'[日志信息]',
+    			merchandise_person:'3',
+    			merchandise_oldprice:'53.00',
+    			merchandise_price:'32.36',
+    			merchandise_stock:'54',
+    			merchandise_urlid:'2'	
+    			},
+    			mer_group_join_person:'1',//加入团的人
+    			},
+    		   {
+    			mer_group_id:3,
+    			merchandise:{
+    			merchandise_id:1;
+    		   	merchandise_thumb_img:'http://www.yayao8.com/resources/img/YaYaoQRCode.jpg',
+    			merchandise_title:'[日志信息]',
+    			merchandise_person:'5',
+    			merchandise_oldprice:'25.00',
+    			merchandise_price:'25.36',
+    			merchandise_stock:'34',
+    			merchandise_urlid:'3'	
+    			},
+    			mer_group_join_person:'3',//加入团的人
+    			}];
+    	});
+    </script>
+</body>
+</html>
