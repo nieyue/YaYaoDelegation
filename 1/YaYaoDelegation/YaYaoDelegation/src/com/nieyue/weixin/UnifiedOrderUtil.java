@@ -130,7 +130,9 @@ public class UnifiedOrderUtil {
 		 // unifiedOrder.setNotifyUrl("http://nieyue.tea18.cn/weixin/notifyUrl");
 		  unifiedOrder.setNotifyUrl(notify_url);
 		  unifiedOrder.setTradeType(trade_type);
-		  unifiedOrder.setOpenid(openid);
+		  if(openid!=null&&!openid.equals("") ){
+			  unifiedOrder.setOpenid(openid);
+		  }
 		  return unifiedOrder;
 		 }
 	 /**
@@ -140,14 +142,19 @@ public class UnifiedOrderUtil {
 	  * @throws Exception
 	  */
 	  public static String getSign(UnifiedOrder unifiedOrder) throws Exception {
-	   String signTemp = "appid="+unifiedOrder.getAppid()
+		 //匹配微信内h5支付和扫码支付
+		  String oi="";
+		  if(unifiedOrder.getOpenid()!=null&&!unifiedOrder.getOpenid().equals("")){
+			 oi="&openid="+unifiedOrder.getOpenid();
+		  }
+		String signTemp = "appid="+unifiedOrder.getAppid()
 	    +"&attach="+unifiedOrder.getAttach()
 	    +"&body="+unifiedOrder.getBody()
 	    +"&device_info="+unifiedOrder.getDeviceInfo()
 	    +"&mch_id="+unifiedOrder.getMchId()
 	    +"&nonce_str="+unifiedOrder.getNonceStr()
 	    +"&notify_url="+unifiedOrder.getNotifyUrl()
-	    +"&openid="+unifiedOrder.getOpenid()
+	    +oi
 	    +"&out_trade_no="+unifiedOrder.getOutTradeNo()
 	    +"&spbill_create_ip="+unifiedOrder.getSpbillCreateIp()
 	    +"&total_fee="+unifiedOrder.getTotalFee()

@@ -44,7 +44,7 @@ var myUtils = {
 	 * return 
 	 */
 	weiXinBrowseVersion:function(){
-		return navigator.userAgent.match(/MicroMessenger\/([\d\.]+)/)[1]);
+		return navigator.userAgent.match(/MicroMessenger\/([\d\.]+)/)[1];
 	},
 	/**
 	 * 微信支付

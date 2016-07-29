@@ -181,7 +181,6 @@ public class WeixinController {
 	 * 微信支付 扫码支付模式二
 	 * @param order 订单
 	 * @param ip 访问ip
-	 * @param openid 用户openid
 	 * @return prepay_id ，code_url（trade_type为NATIVE有返回）
 	 * @throws Exception 
 	 */
@@ -191,8 +190,8 @@ public class WeixinController {
 		o.setOrderId(234);
 		//String openid = (String)request.getSession().getAttribute("openid");
 		//String openid = "orFtEwbV4pZCgYpU09JrfZavbAjE";//放肆约
-		String openid = "oDvosuIH0Lmn9eDN1nTTTQGVww74";//雅耀本真
-		String result = WeiXinBusiness.WXUnifiedorder(o,"测试", UnifiedOrderUtil.getIpAddr(request), openid,"NATIVE","http://nieyue.tea18.cn/weixin/notifyUrl");
+		//String openid = "oDvosuIH0Lmn9eDN1nTTTQGVww74";//雅耀本真
+		String result = WeiXinBusiness.WXUnifiedorder(o,"测试", UnifiedOrderUtil.getIpAddr(request), null,"NATIVE","http://nieyue.tea18.cn/weixin/notifyUrl");
 		System.out.println(result);
 		Map<String, Object> m = MyDom4jUtil.xmlStrToMap(result);
 		String prepay_id = (String) m.get("prepay_id");
@@ -208,6 +207,31 @@ public class WeixinController {
 		map.put("pay_sign",UnifiedOrderUtil.getPaySign(map));
 		map.put("pay_sign",UnifiedOrderUtil.getPaySign(map));
 		map.put("code_img","/resources/payQRCode/"+merName+".jpg");
+		String userAgent=request.getHeader("user-agent");
+		char agent = userAgent.charAt(userAgent.indexOf("MicroMessenger")+15);
+		map.put("agent",new String(new char[]{agent}) );
+		JSONObject json = JSONObject.fromObject(map);
+		return json.toString();
+	}
+	/**
+	 * 微信支付 扫码支付模式二(暂时商户没有权限)
+	 * @param order 订单
+	 * @param ip 访问ip
+	 * @return prepay_id ，code_url（trade_type为NATIVE有返回）
+	 * @throws Exception 
+	 */
+	@RequestMapping(value="/h5paywap/{orderId}",method={RequestMethod.GET,RequestMethod.POST})
+	public @ResponseBody String WeiXinH5Pay(@PathVariable("orderId")String orderId,HttpServletRequest request) throws Exception {
+		Order o=new Order();
+		o.setOrderId(234);
+		String result = WeiXinBusiness.WXUnifiedorder(o,"测试", UnifiedOrderUtil.getIpAddr(request), null,"MWEB","http://nieyue.tea18.cn/weixin/notifyUrl");
+		System.out.println(result);
+		Map<String, Object> m = MyDom4jUtil.xmlStrToMap(result);
+		String prepay_id = (String) m.get("prepay_id");
+		
+		Map<String,String> map=UnifiedOrderUtil.getPaySignMap(prepay_id);
+		map.put("pay_sign",UnifiedOrderUtil.getPaySign(map));
+		map.put("pay_sign",UnifiedOrderUtil.getPaySign(map));
 		String userAgent=request.getHeader("user-agent");
 		char agent = userAgent.charAt(userAgent.indexOf("MicroMessenger")+15);
 		map.put("agent",new String(new char[]{agent}) );

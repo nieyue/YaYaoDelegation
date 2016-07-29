@@ -24,6 +24,8 @@
 			<a id="refund" class="btn btn-block btn-danger" href="#">微信申请退款</a>
 			<a id="queryRefund" class="btn btn-block btn-danger" href="#">查询微信退款订单</a>
 			<a id="qrcode2" class="btn btn-block btn-danger" href="#">点击扫码</a>
+			<a id="qrcode2change" class="btn btn-block btn-danger" href="#">点击直接支付</a>
+			<a class="btn btn-block btn-danger" href="weixin://wxpay/bizpayurl?pr=QV8u3c9">点击直接支付</a>
 			<div id="qrcode2Div"  href="#">
 				<img class="img-thumbnail" style="width:200px;height:200px;border:1px solid red;" ng-src="{{qrcode2Img}}">
 			</div>
@@ -36,8 +38,7 @@
 	<script src="/resources/js/base.js"></script>
 	<script src="/resources/js/weixinlogin.js"></script>
 	<script>
-	var testApp = angular.module('testApp', ['ngAnimate']);
-	testApp.controller('testCtrl', function($scope,$http) {
+	 angular.module('testApp', ['ngAnimate']).controller('testCtrl', function($scope,$http) {
 		$scope.testapp="2324324";
 		$("#closeOrder").click(function(){
 			//alert("sdf")
@@ -71,6 +72,14 @@
 				$scope.$apply();
 			});
 		});
+		/* $("#qrcode2change").click(function(){
+			//alert("sdf")
+			$.post("/weixin/qrcode2/22",function(data){
+				//data=JSON.parse(data);
+				alert(data);
+				$("#qrcode2change").attr("href",data.code_url);
+			});
+		}); */
 		
 	});
 	

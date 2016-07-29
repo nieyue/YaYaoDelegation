@@ -60,6 +60,7 @@ public class UserControllerTest {
 		//String url="/weixin/authorize";//授权登录
 		//String url="/weixin/test/11";//统一下单
 		String url="/weixin/qrcode2/11";//统一下单扫码2
+		//String url="/weixin/h5paywap/11";//统一下单h5
 		//String url="/testXmlUser?<xml><user_id>324</user_id><nice_name>sdfsdf</nice_name><name/><password/><reg_time>1468900206858</reg_time><last_login_time/></xml>";
 		//String url="/sdfsd/sdf/sdbf/sdf";
 		//String url="/user/gobackhtml";
