@@ -6,6 +6,6 @@ public class Test5 {
 	public static void main(String[] args) {
 		System.out.println(UUID.randomUUID().toString().replace("-",""));
 	System.out.println((int)(Math.random()*9000+1000));
-		
+		System.out.println(Test5.class);
 	}
 }

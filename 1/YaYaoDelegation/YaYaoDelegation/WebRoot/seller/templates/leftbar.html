@@ -1,0 +1,67 @@
+<!-- 左边导航 -->
+	 <div class="panel-group"  id="accordion" role="tablist" aria-multiselectable="true">
+  <div class="panel " >
+    <div class="panel-heading" >
+      <h4 class="panel-title">
+        <a role="button"  ui-sref="main.notice" href="#collapseOne">
+          	首页
+        </a>
+      </h4>
+    </div>
+  </div>
+  <div class="panel " >
+    <div class="panel-heading" role="tab" id="headingOne">
+      <h4 class="panel-title">
+        <a role="button" data-toggle="collapse" class="toCaret" data-parent="#accordion" ui-sref="#" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          商品管理
+        </a>
+          <span class="caret pull-right" ></span>
+      </h4>
+    </div>
+    <div id="collapseOne" class="panel-collapse collapse " role="tabpanel" aria-labelledby="headingOne">
+      <div class="panel-body">
+      <div><a ui-sref="main.merCate">商品分类</a></div>
+      <div><a ui-sref="main.merInfo">商品产品</a></div>
+      <div><a ui-sref="main.merGroup">商品拼团</a></div>
+      <div><a ui-sref="main.merDistribution">商品分销</a></div>
+      </div>
+    </div>
+  </div>
+  <div class="panel " >
+    <div class="panel-heading" role="tab" id="headingTwo">
+      <h4 class="panel-title">
+        <a  role="button" data-toggle="collapse" class="toCaret" data-parent="#accordion" ui-sref="#" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+          订单管理
+        </a>
+          <span class="caret pull-right"></span>
+      </h4>
+    </div>
+    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+      <div class="panel-body">
+		<div><a ui-sref="main.orderWaitDelivery">待发货</a></div>
+		<div><a ui-sref="main.orderWaitPay">待付款</a></div>
+		<div><a ui-sref="main.orderDelivery">已发货</a></div>
+		<div><a ui-sref="main.orderRefund">退款中</a></div>
+		<div><a ui-sref="main.orderCompleted">已完成</a></div>
+		<div><a ui-sref="main.orderClosed">已关闭</a></div>
+      </div>
+    </div>
+  </div>
+  <div class="panel" >
+    <div class="panel-heading" role="tab" id="headingThree">
+      <h4 class="panel-title">
+        <a  role="button" class="toCaret" data-toggle="collapse" data-parent="#accordion" ui-sref="#" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+          用户管理
+        </a>
+          <span class="caret pull-right" ></span>
+      </h4>
+    </div>
+    <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+      <div class="panel-body">
+        <div><a ui-sref="main.userInfo">客户信息</a></div>
+      	<div><a ui-sref="main.userMsg">客户消息</a></div>
+      </div>
+    </div>
+  </div>
+</div>
+	<!-- end左边导航 -->

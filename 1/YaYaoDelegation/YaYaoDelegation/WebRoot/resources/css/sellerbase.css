@@ -40,7 +40,8 @@ body,html{
 .panel{
 	text-align:center;
 	border-radius:0 !important;
-	margin-top:1px !important;
+	margin:-1px !important;
+	border:1px solid #ccc;
 }
 /**
 **重写panel-body
@@ -76,7 +77,7 @@ a{
 	text-decoration: none !important;
 }
 
-a:visited,a:hover,a:active{
+a:hover{
 	text-decoration: none !important;
 	color:red !important;
 }
@@ -307,7 +308,61 @@ a:visited,a:hover,a:active{
 */
 .seller-main-body{
 	border:1px solid #fff;
-	height:100%;
+	min-height:800px;
 	width:1100px;
 	margin:auto;
+	background-color:#fff;
+	position: relative;
+}
+.seller-main-body-left{
+	display: inline-block;
+	position:absolute;
+	left:0;
+	top:0;
+}
+.seller-main-body-right{
+	display: inline-block;
+	position:absolute;
+	left:250px;
+	top:0;
+}
+/**
+**后台首页
+*/
+.seller-notes-title{
+	text-indent:1rem;
+	color:#D422222;
+	font-weight:bolder;
+	font-size: 1.4rem; 
+}
+.seller-notes-title span{
+	color:#ff3300;
+	font-size: 1.6rem; 
+}
+.seller-notes-body{
+	border-top: 2px dotted #fff;
+	height:300px;
+	padding:1%;
+}
+.seller-notes-body-warp{
+	border-bottom: 1px dotted #fff;
+}
+.seller-notes-body-article{
+	display:inline-block;
+	margin-top:2px;	
+	white-space: nowrap;
+	text-overflow:ellipsis;
+	overflow: hidden;
+	width:98%;
+	color:#999;
+}
+.seller-notes-body-time{
+	display:inline-block;
+	width:135px;
+	color:#999;
+}
+@media screen and (max-width:760px){
+   .seller-notes-line{
+	width:40%;
+}
 }

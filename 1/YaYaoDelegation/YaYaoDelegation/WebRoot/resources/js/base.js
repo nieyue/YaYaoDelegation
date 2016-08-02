@@ -86,6 +86,27 @@ var myUtils = {
 		};
 	},
 	/**
+	 * 旋转180度
+	 * clickObj 点击的对象元素属性
+	 * rotateObj 旋转的对象,null为自身
+	 */
+	myClickRotate:function(clickObj,rotateObj){
+		var isClick=false;
+    	$(clickObj).off("click").on("click",function(){
+    		var $this=$(this).next(rotateObj);
+    		if(rotateObj==null){
+    			$this=$(this);
+    		}
+    	if(isClick){
+    		$this.css('transform','rotate(0deg)');
+			  isClick=false;
+    	}else{
+    		$this.css('transform','rotate(180deg)');
+			  isClick=true;
+    	}
+    	});
+	},
+	/**
 	 * 时间戳转yyyy-MM-dd hh:mm:ss
 	 * 
 	 */
