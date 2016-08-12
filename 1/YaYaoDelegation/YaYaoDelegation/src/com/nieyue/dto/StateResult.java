@@ -84,5 +84,15 @@ public class StateResult {
 		sr.setMsg(msg);
 		return sr;
 	}
+	/**
+	 * 自定义获取返回状态
+	 * @param bl 
+	 */
+	public static StateResult getSlefSR(String code,String msg){
+		StateResult sr = new StateResult();
+		sr.setCode(Integer.valueOf(code));
+		sr.setMsg(msg);
+		return sr;
+	}
 	
 }

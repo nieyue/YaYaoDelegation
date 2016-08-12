@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+<mapper namespace="com.nieyue.dao.SellerDao">
+<!-- 添加注册商户 -->
+<insert id="addSeller" parameterType="Seller" flushCache="true">  
+   INSERT IGNORE INTO
+   		 seller_tb (
+   		 seller_email,seller_phone,seller_password,
+   		 seller_nice_name,seller_img,seller_number,
+   		 seller_signature,is_authentication,
+   		 <if test="registerDate!=null">register_date,</if>
+   		 authentication_date,appid,secret
+   		 )
+   VALUES
+    	 (#{sellerEmail},#{sellerPhone},#{sellerPassword},
+    	 #{sellerNiceName},#{sellerImg},#{sellerNumber},
+    	 #{sellerSignature},#{isAuthentication},
+   		 <if test="registerDate!=null">#{registerDate},</if>
+    	 #{authenticationDate},#{appid},#{secret}
+  			)  
+</insert>  
+<!-- 更新注册商户 -->
+<update id="updateSeller" parameterType="Seller">  
+    UPDATE 
+    	seller_tb 
+    SET 
+    	seller_email=#{sellerEmail},
+    	seller_phone=#{sellerPhone},
+    	seller_password=#{sellerPassword},
+    	seller_nice_name=#{sellerNiceName},
+    	seller_img=#{sellerImg},
+    	seller_number=#{sellerNumber},
+    	seller_signature=#{sellerSignature},
+    	is_authentication=#{isAuthentication},
+    	<if test="registerDate!=null">
+    	register_date=#{registerDate},
+    	</if>
+    	authentication_date=#{authenticationDate},
+    	appid=#{appid},
+    	secret=#{secret}
+    WHERE
+    	 seller_id=#{sellerId}  
+</update> 
+<!-- 加载单个商户 -->
+<select id="loadSeller" parameterType="Integer" resultType="Seller" >
+SELECT 
+	    seller_id,
+	    seller_email,
+        seller_phone,
+    	seller_password,
+    	seller_nice_name,
+    	seller_img,
+    	seller_number,
+    	seller_signature,
+    	is_authentication,
+    	register_date,
+    	authentication_date,
+    	appid,
+    	secret
+FROM seller_tb 
+WHERE seller_id=#{sellerId}
+</select>
+<!-- 分页查询商户-->
+<select id="searchSeller" resultType="Seller">  
+    SELECT
+    	seller_id,
+	    seller_email,
+        seller_phone,
+    	seller_password,
+    	seller_nice_name,
+    	seller_img,
+    	seller_number,
+    	seller_signature,
+    	is_authentication,
+    	register_date,
+    	authentication_date,
+    	appid,
+    	secret  
+	FROM seller_tb
+	ORDER BY
+		register_date
+	DESC LIMIT
+		#{pageNum},#{pageSize} 
+</select>
+<!-- 查询所有商户 -->
+<select id="browseSeller" resultType="Seller">  
+    SELECT
+    	seller_id,
+	    seller_email,
+        seller_phone,
+    	seller_password,
+    	seller_nice_name,
+    	seller_img,
+    	seller_number,
+    	seller_signature,
+    	is_authentication,
+    	register_date,
+    	authentication_date,
+    	appid,
+    	secret 
+	FROM seller_tb
+	ORDER BY
+		register_date
+	DESC 
+</select>
+<!-- 邮箱检查商户是否存在 -->
+<select id="chkEmailLoginName" resultType="boolean">  
+    SELECT
+	 	count(seller_id)
+	FROM user_tb
+	WHERE 
+    	seller_email=#{sellerEmail},
+</select>  
+<!-- 手机检查商户是否存在 -->
+<select id="chkPhoneLoginName" resultType="boolean">  
+    SELECT
+	 	count(seller_id)
+	FROM user_tb
+	WHERE 
+    	seller_phone=#{sellerPhone},
+</select>  
+<!-- 邮箱找回商户 -->
+<select id="emailRetrieveAccount" resultType="Seller">  
+    SELECT
+	 	seller_id,
+	    seller_email,
+        seller_phone,
+    	seller_password,
+    	seller_nice_name,
+    	seller_img,
+    	seller_number,
+    	seller_signature,
+    	is_authentication,
+    	register_date,
+    	authentication_date,
+    	appid,
+    	secret  
+	FROM seller_tb
+	WHERE 
+    	seller_email=#{sellerEmail},
+</select>  
+<!-- 手机找回商户 -->
+<select id="phoneRetrieveAccount" resultType="Seller">  
+    SELECT
+	 	seller_id,
+	    seller_email,
+        seller_phone,
+    	seller_password,
+    	seller_nice_name,
+    	seller_img,
+    	seller_number,
+    	seller_signature,
+    	is_authentication,
+    	register_date,
+    	authentication_date,
+    	appid,
+    	secret  
+	FROM seller_tb
+	WHERE 
+    	seller_phone=#{sellerPhone},
+</select>  
+<!-- 邮箱商户登录-->
+<select id="sellerEmailLogin"  resultType="Seller">  
+    SELECT
+	 	seller_id,
+	    seller_email,
+        seller_phone,
+    	seller_password,
+    	seller_nice_name,
+    	seller_img,
+    	seller_number,
+    	seller_signature,
+    	is_authentication,
+    	register_date,
+    	authentication_date,
+    	appid,
+    	secret 
+	FROM seller_tb
+	WHERE 
+    seller_email=#{sellerEmail},
+	and 
+	seller_password=#{sellerPassword}
+</select>  
+<!-- 手机商户登录-->
+<select id="sellerPhoneLogin"  resultType="Seller">  
+    SELECT
+	 	seller_id,
+	    seller_email,
+        seller_phone,
+    	seller_password,
+    	seller_nice_name,
+    	seller_img,
+    	seller_number,
+    	seller_signature,
+    	is_authentication,
+    	register_date,
+    	authentication_date,
+    	appid,
+    	secret 
+	FROM seller_tb
+	WHERE 
+    seller_phone=#{sellerPhone},
+	and 
+	seller_password=#{sellerPassword}
+</select>  
+
+<!-- 删除注册商户-->
+<delete id="delSeller"  parameterType="Integer">  
+    DELETE FROM
+    	 seller_tb WHERE seller_id=#{sellerId}
+</delete>  
+</mapper>

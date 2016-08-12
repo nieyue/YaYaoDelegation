@@ -47,17 +47,29 @@ public class StatusCode {
 	 */
 	public static String USER_EXIST="USER_EXIST";
 	/**
-	 * 商户已经存在
+	 * 商户Email已经存在
 	 */
-	public static String SELLER_EXIST="SELLER_EXIST";
+	public static String SELLER_EMAIL_EXIST="SELLER_EMAIL_EXIST";
+	/**
+	 * 商户手机已经存在
+	 */
+	public static String SELLER_PHONE_EXIST="SELLER_PHONE_EXIST";
+	/**
+	 * 商户Email不存在
+	 */
+	public static String SELLER_EMAIL_NOT_EXIST="SELLER_EMAIL_NOT_EXIST";
+	/**
+	 * 商户手机不存在
+	 */
+	public static String SELLER_PHONE_NOT_EXIST="SELLER_PHONE_NOT_EXIST";
+	/**
+	 * 输入错误
+	 */
+	public static String INPUT_ERROR="INPUT_ERROR";
 	/**
 	 * 用户不存在
 	 */
 	public static String USER_NOT_EXIST="USER_NOT_EXIST";
-	/**
-	 * 商户不存在
-	 */
-	public static String SELLER_NOT_EXIST="SELLER_NOT_EXIST";
 	/**
 	 * 一分钟请求一次
 	 */

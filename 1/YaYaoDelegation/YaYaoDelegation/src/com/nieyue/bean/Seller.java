@@ -2,7 +2,6 @@ package com.nieyue.bean;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.Set;
 
 /**
  * 卖家类
@@ -19,10 +18,6 @@ public class Seller implements Serializable {
 	 * 店铺id
 	 */
 	private Integer sellerId;
-	/**
-	 * 商品
-	 */
-	private Set<Mer> mer;
 	/**
 	 * 邮箱
 	 */
@@ -76,14 +71,13 @@ public class Seller implements Serializable {
 		super();
 	}
 
-	public Seller(Integer sellerId, Set<Mer> mer, String sellerEmail,
+	public Seller(Integer sellerId,  String sellerEmail,
 			String sellerPhone, String sellerPassword, String sellerNiceName,
 			String sellerImg, String sellerSignature, Integer sellerNumber,
 			Integer isAuthentication, Date registerDate,
 			Date authenticationDate,String appid, String secret) {
 		super();
 		this.sellerId = sellerId;
-		this.mer = mer;
 		this.sellerEmail = sellerEmail;
 		this.sellerPhone = sellerPhone;
 		this.sellerPassword = sellerPassword;
@@ -104,14 +98,6 @@ public class Seller implements Serializable {
 
 	public void setSellerId(Integer sellerId) {
 		this.sellerId = sellerId;
-	}
-
-	public Set<Mer> getMer() {
-		return mer;
-	}
-
-	public void setMer(Set<Mer> mer) {
-		this.mer = mer;
 	}
 
 	public String getSellerEmail() {
