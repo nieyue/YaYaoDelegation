@@ -1,16 +1,23 @@
 <!-- 商品分类 -->
-<button type="button" class="btn btn-danger" id="addMerCategoryBtn" >+添加分类</button>
+<button type="button" class="btn btn-danger" id="addMerCateBtn" ng-click="addMerCateBtn()" >+添加分类</button>
 <hr/>
-<table class="table text-center" id="merCategoryList">
+<table class="table table-striped text-center right-bar" id="merCateList" >
  <thead>
       <tr>
          <th class="text-center">分类名称</th>
-         <th class="text-center">创建时间</th>
-         <th class="text-right">操</th>
-         <th class="text-left">作</th>
+         <th class="text-center">更新时间</th>
+         <th class="text-center">操&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;作</th>
       </tr>
    </thead>
    <tbody>
+   	  <tr ng-repeat="merCate in merCateList" >
+         <td class="text-center">{{merCate.name||merCateInit.name}}</td>
+         <td class="text-center">{{merCate.update_time||merCateInit.update_time}}</td>
+         <td class="text-center">
+         	<a ng-click="updateMerCate(merCate.mer_cate_id||merCateInit.mer_cate_id)">编辑</a>
+         	<a ng-click="delMerCate(merCate.mer_cate_id||merCateInit.mer_cate_id)">删除</a>
+         </td>
+      </tr>
       
    </tbody>
 </table>

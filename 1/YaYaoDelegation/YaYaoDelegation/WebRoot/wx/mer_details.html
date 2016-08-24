@@ -25,14 +25,14 @@
 	<div ng-controller="merDetailsCtrl" class="comment-wrap">
 				<!-- 详情展示 -->
 				<div class="thumbnail" style="padding:0;">
-					<img ng-src="{{currentMerchandise.merchandise_thumb_img}}">
+					<img ng-src="{{currentMer.mer_thumb_img}}">
 					<div class="caption">
-						<div ><span ng-bind="currentMerchandise.merchandise_title"></span></div>
-						<div ><span ng-bind="currentMerchandise.merchandise_content" class="text-muted"></span></div>
+						<div ><span ng-bind="currentMer.mer_title"></span></div>
+						<div ><span ng-bind="currentMer.mer_content" class="text-muted"></span></div>
 					 <div class="row">
 						<div class="col-xs-9 ">
-							<div class="text-danger">￥<span ng-bind="currentMerchandise.merchandise_price||'0.00'"></span> <span class="label label-danger"><span ng-bind="currentMerchandise.merchandise_person||0"></span>人拼团价</span></div>
-							<div class="text-muted">价格 ￥<span ng-bind="currentMerchandise.merchandise_oldsprice||0"></span> 已出售：<span ng-bind="currentMerchandise.merchandise_sold||0"></span>件</div>
+							<div class="text-danger">￥<span ng-bind="currentMer.mer_price||'0.00'"></span> <span class="label label-danger"><span ng-bind="currentMer.mer_person||0"></span>人拼团价</span></div>
+							<div class="text-muted">价格 ￥<span ng-bind="currentMer.mer_oldsprice||0"></span> 已出售：<span ng-bind="currentMer.mer_sold||0"></span>件</div>
 						</div>
 						<div class="col-xs-3 text-center" style="border-left:1px solid #ccc">
 							<div class="text-danger" ><span ng-bind="leader.commission||'0.00'"></span>%</div>
@@ -44,13 +44,13 @@
 				<!-- 详情展示end -->
 				<!-- 按钮-->
 				<div class="row">
-					<button class="col-xs-offset-1 col-xs-5 btn btn-danger btn-lg" ng-click="currentMerchandiseOpenGroup()">我要开团</button>
-					<button class="col-xs-offset-1 col-xs-4 btn btn-success btn-lg" ng-click="currentMerchandiseJoinGroup()">直接参团</button>
+					<button class="col-xs-offset-1 col-xs-5 btn btn-danger btn-lg" ng-click="currentMerOpenGroup()">我要开团</button>
+					<button class="col-xs-offset-1 col-xs-4 btn btn-success btn-lg" ng-click="currentMerJoinGroup()">直接参团</button>
 				</div>
 				<!-- 按钮end-->
 				<!-- 商品图片列表-->
 				<div class="comment-list-item text-center">
-					<a ng-click="currentMerchandiseImgs()">点击加载图文详情</a>
+					<a ng-click="currentMerImgs()">点击加载图文详情</a>
 				</div>
 				<!-- 商品图片列表end-->
 				<!-- 收货地址-->
@@ -129,6 +129,8 @@
 					xian_val:"长沙市"});
 		var merDetailsApp = angular.module('merDetailsApp', ['ngAnimate']);
 		merDetailsApp.controller('merDetailsCtrl', function($scope,$http) {
+			
+			myUtils.idNotExistence("seller_id", "/404");
 			$scope.addressdata={
 					province:"湖南",
 					city:"长沙",
@@ -139,45 +141,46 @@
 				console.log($scope.myCheck)
 			});
 			//当前商品数据
-			$scope.currentMerchandise={
-					merchandise_thumb_img:'/resources/sellerUpload/7/黑茶/百两茶/百两茶_01.jpg',
-        			merchandise_title:'惠茶，8人，团价24，佣金8%',
-        			merchandise_content:'是打发撒的发生的范德萨范德萨发的司法是打发撒的发生的范德萨范德萨发的司法是打发撒的发生的范德萨范德萨发的司法',
-        			merchandise_person:'5',
-        			merchandise_oldprice:'55.00',
-        			merchandise_price:'55.00',
-        			merchandise_stock:'22',
-        			merchandise_urlid:'#'
+			$scope.currentMer={
+					mer_thumb_img:'/resources/sellerUpload/7/黑茶/百两茶/百两茶_01.jpg',
+        			mer_title:'惠茶，8人，团价24，佣金8%',
+        			mer_content:'是打发撒的发生的范德萨范德萨发的司法是打发撒的发生的范德萨范德萨发的司法是打发撒的发生的范德萨范德萨发的司法',
+        			mer_person:'5',
+        			mer_oldprice:'55.00',
+        			mer_price:'55.00',
+        			mer_stock:'22',
+        			mer_urlid:'#',
+        			seller_id:'23'
         			}; 
 			//当前商品团长佣金
 			$scope.leader={
 				commission:'8.00'	
 			}; 
-			$scope.currentMerchandiseImgs=function(){
-				console.log(myUtils.GetQueryString("merchandise_id"));
+			$scope.currentMerImgs=function(){
+				console.log(myUtils.GetQueryString("mer_id"));
 			};
-			$scope.currentMerchandiseJoinGroup=function(){
-				console.log(myUtils.GetQueryString("merchandise_id"));
-				location.replace("/wx/join_group_list?merchandise_id="+myUtils.GetQueryString("merchandise_id"));
+			$scope.currentMerJoinGroup=function(){
+				console.log(myUtils.GetQueryString("mer_id"));
+				location.replace("/wx/join_group_list?seller_id="+myUtils.GetQueryString("seller_id")+"&mer_id="+myUtils.GetQueryString("mer_id"));
 			};
 			//打开收货地址
 			$scope.receiptAddress=true;
-			$scope.currentMerchandiseOpenGroup=function(){
+			$scope.currentMerOpenGroup=function(){
 			$("#fullScreen").removeClass("hide");
 			$("#receiptAddress").removeClass("hide");
 				$scope.receiptAddress=!$scope.receiptAddress;
-				console.log(myUtils.GetQueryString("merchandise_id"));
+				console.log(myUtils.GetQueryString("mer_id"));
 				//提交表单
 				$scope.receiptAddressFormSubmit=function(){
 					if($scope.receiptAddressForm.$valid){
-					myUtils.myPrevToast("支付中...", function(){
+					myUtils.myPrevToast("生成订单", function(){
 						$scope.receiptAddressForm.$invalid=true;
 					 $http.get("/user/login?name=15111336587&password=123456")
 					    .success(function(data,status,config,header) {
 					    	$scope.receiptAddressForm.$invalid=false;
 					    	
-					    	myUtils.myPrevToast("支付完成", function(){
-					    		location.replace("/order")
+					    	myUtils.myPrevToast("订单生成", function(){
+					    		location.replace("/wx/order")
 					    		}, "remove");
 					    	});
 					}, "add");

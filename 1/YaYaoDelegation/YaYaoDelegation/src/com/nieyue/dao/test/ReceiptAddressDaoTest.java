@@ -1,6 +1,6 @@
 package com.nieyue.dao.test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.fail;
 
 import java.util.List;
 
@@ -13,7 +13,6 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.nieyue.bean.Mer;
 import com.nieyue.bean.ReceiptAddress;
 import com.nieyue.dao.ReceiptAddressDao;
 @RunWith(SpringJUnit4ClassRunner.class)

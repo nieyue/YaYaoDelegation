@@ -7,6 +7,25 @@ body,html{
 	font-family: "Helvetica Neue","Hiragino Sans GB","Microsoft YaHei","\9ED1\4F53","Arial,sans-serif";
 	font-size:14px;
 }
+
+/**
+**修改模态框位置
+*/
+.modal-dialog{
+	margin:12% auto;
+}
+/**
+**input样式
+*/
+.comment-input{
+	width:90%;
+	height:50px;
+	padding-left:8px;
+	margin:5px;
+}
+.comment-input-margin{
+	margin:5px;
+}
 /**
 **重写navbar-default
 */
@@ -365,4 +384,11 @@ a:hover{
    .seller-notes-line{
 	width:40%;
 }
+}
+/**
+**右边框架
+*/
+.right-bar{
+	width:820px;
+	height:100%;
 }

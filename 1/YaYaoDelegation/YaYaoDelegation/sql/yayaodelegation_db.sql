@@ -40,6 +40,17 @@ INDEX idx_register_date (register_date) USING BTREE,
 INDEX idx_authentication_date (authentication_date) USING BTREE
 )ENGINE = InnoDB AUTO_INCREMENT=1000 DEFAULT CHARSET=utf8 COMMENT='商户表';
 
+#创建商品类型表 
+CREATE TABLE mer_cate_tb(
+mer_cate_id int(11) NOT NULL AUTO_INCREMENT COMMENT '商品类型id',
+name varchar(255) COMMENT '商品类型名称',
+update_time timestamp DEFAULT CURRENT_TIMESTAMP COMMENT '更新时间',
+seller_id int(11) COMMENT '商户id,外键',
+PRIMARY KEY (mer_cate_id),
+CONSTRAINT FK_SELLER_MERCATE FOREIGN KEY (seller_id) REFERENCES seller_tb (seller_id) ON DELETE CASCADE ON UPDATE CASCADE,
+INDEX idx_seller_id (seller_id) USING BTREE
+)ENGINE = InnoDB AUTO_INCREMENT=1000 DEFAULT CHARSET=utf8 COMMENT='商品类型表';
+
 #创建商品表 
 CREATE TABLE mer_tb(
 mer_id int(11) NOT NULL AUTO_INCREMENT COMMENT '商品id',

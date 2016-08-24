@@ -78,5 +78,13 @@ public class ThirdParty {
 	 *阿里大鱼APPSECRET
 	 */
 	public static String ALIBABA_SMS_APPSECRET="ALIBABA_SMS_APPSECRET";
+	/**
+	 *阿里百川APPKEY
+	 */
+	public static String ALIBABA_IM_APPKEY="ALIBABA_IM_APPKEY";
+	/**
+	 *阿里百川APPSECRET
+	 */
+	public static String ALIBABA_IM_APPSECRET="ALIBABA_IM_APPSECRET";
 	
 }

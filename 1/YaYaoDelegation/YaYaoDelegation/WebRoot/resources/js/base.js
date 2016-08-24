@@ -34,8 +34,11 @@ var myUtils = {
 	 * return false 否
 	 */
 	isWeiXinBrowse:function(){
-		if(navigator.userAgent.match(/MicroMessenger/)[0]==='MicroMessenger'){
+		var wx=navigator.userAgent.match(/MicroMessenger/);
+		if(wx){
+		if(wx[0]==='MicroMessenger'){
 			return true;
+		}
 		}
 		return false;
 	},
@@ -75,13 +78,13 @@ var myUtils = {
 			});
 	},
 	/**
-	 * 如果没选择店铺就404
+	 * 如果没选择id就404
 	 * 
 	 */
-	sellerNotExistence:function(){
-		if(myUtils.GetQueryString("seller_id")==null||myUtils.GetQueryString("seller_id")==''){
+	idNotExistence:function(id,url){
+		if(myUtils.GetQueryString(id)==null||myUtils.GetQueryString(id)==''){
 			if(location.href.indexOf("404")==-1){
-				location.replace("/mall/mobile/404");
+				location.replace(url);
 			}
 		};
 	},
@@ -138,7 +141,8 @@ var myUtils = {
 	{
 	     var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
 	     var r = window.location.search.substr(1).match(reg);
-	     if(r!=null)return  unescape(r[2]); return null;
+	     if(r!=null)return  decodeURIComponent(r[2]); return null;
+	     //if(r!=null)return  unescape(r[2]); return null;
 	},
 	/**
 	 * cookie

@@ -19,16 +19,16 @@
 		<div class="list-group media comment-list-item" ng-repeat="merJoinGroup in merJoinGroupList||merJoinGroupInit">
 			<div class="media-left">
 				<a href="#"> <img class="media-object img-rounded comment-list-item-img "
-					ng-src="{{merJoinGroup.merchandise.merchandise_thumb_img}}" >
+					ng-src="{{merJoinGroup.mer.mer_thumb_img}}" >
 				</a>
 			</div>
 			<div class="media-body">
-				<div class="media-heading" ng-bind="merJoinGroup.merchandise.merchandise_title"></div>
+				<div class="media-heading" ng-bind="merJoinGroup.mer.mer_title"></div>
 				<div class="pull-left">
-					<div class="text-danger"><span ng-bind="merchandise.merchandise_person||merchandiseInit.merchandise_person"></span>人拼团价：￥<span ng-bind="merchandise.merchandise_price||merchandiseInit.merchandise_price"></span></div>
-					<div class="text-muted">已出售：<span ng-bind="merchandise.merchandise_sold||merchandiseInit.merchandise_sold"></span>件</div>
+					<div class="text-danger"><span ng-bind="mer.mer_person||merInit.mer_person"></span>人拼团价：￥<span ng-bind="mer.mer_price||merInit.mer_price"></span></div>
+					<div class="text-muted">已出售：<span ng-bind="mer.mer_sold||merInit.mer_sold"></span>件</div>
 				</div>
-				<a class="pull-right btn btn-danger" ng-href="/wx/mer_details?merchandise_id={{merchandise.merchandise_urlid||merchandiseInit.merchandise_urlid}}">立即开团</a>
+				<a class="pull-right btn btn-danger" ng-href="/wx/mer_details?seller_id={{mer.seller_id}}&mer_id={{mer.mer_urlid||merInit.mer_urlid}}">立即开团</a>
 			</div>
 		</div>
 		<!-- 参团列表end -->
@@ -43,49 +43,53 @@
 	<script>
     	var merJoinGroupApp=angular.module('merJoinGroupApp',[]);
     	merJoinGroupApp.controller('merJoinGroupCtrl',function($scope){
+    		myUtils.idNotExistence("seller_id", "/404");
     		//本商品参团列表初始化
     		$scope.merJoinGroupInit={};
     		//本商品参团列表
     		$scope.merJoinGroupList=[
     		   {
     			mer_group_id:1,
-    			merchandise:{
-    			merchandise_id:1;
-    		   	merchandise_thumb_img:'http://www.yayao8.com/resources/img/YaYaoQRCode.jpg',
-    			merchandise_title:'[日志信息]',
-    			merchandise_person:'3',
-    			merchandise_oldprice:'55.00',
-    			merchandise_price:'22.36',
-    			merchandise_stock:'54',
-    			merchandise_urlid:'1'	
+    			mer:{
+    			mer_id:1;
+    		   	mer_thumb_img:'http://www.yayao8.com/resources/img/YaYaoQRCode.jpg',
+    			mer_title:'[日志信息]',
+    			mer_person:'3',
+    			mer_oldprice:'55.00',
+    			mer_price:'22.36',
+    			mer_stock:'54',
+    			mer_urlid:'1',
+    			seller_id:'23'	
     			},
     			mer_group_join_person:'2',//加入团的人
     			},
     		   {
     			mer_group_id:2,
-    			merchandise:{
-    			merchandise_id:1;
-    		   	merchandise_thumb_img:'http://www.yayao8.com/resources/img/YaYaoQRCode.jpg',
-    			merchandise_title:'[日志信息]',
-    			merchandise_person:'3',
-    			merchandise_oldprice:'53.00',
-    			merchandise_price:'32.36',
-    			merchandise_stock:'54',
-    			merchandise_urlid:'2'	
+    			mer:{
+    			mer_id:1;
+    		   	mer_thumb_img:'http://www.yayao8.com/resources/img/YaYaoQRCode.jpg',
+    			mer_title:'[日志信息]',
+    			mer_person:'3',
+    			mer_oldprice:'53.00',
+    			mer_price:'32.36',
+    			mer_stock:'54',
+    			mer_urlid:'2',
+    			seller_id:'23'	
     			},
     			mer_group_join_person:'1',//加入团的人
     			},
     		   {
     			mer_group_id:3,
-    			merchandise:{
-    			merchandise_id:1;
-    		   	merchandise_thumb_img:'http://www.yayao8.com/resources/img/YaYaoQRCode.jpg',
-    			merchandise_title:'[日志信息]',
-    			merchandise_person:'5',
-    			merchandise_oldprice:'25.00',
-    			merchandise_price:'25.36',
-    			merchandise_stock:'34',
-    			merchandise_urlid:'3'	
+    			mer:{
+    			mer_id:1;
+    		   	mer_thumb_img:'http://www.yayao8.com/resources/img/YaYaoQRCode.jpg',
+    			mer_title:'[日志信息]',
+    			mer_person:'5',
+    			mer_oldprice:'25.00',
+    			mer_price:'25.36',
+    			mer_stock:'34',
+    			mer_urlid:'3',
+    			seller_id:'23'	
     			},
     			mer_group_join_person:'3',//加入团的人
     			}];

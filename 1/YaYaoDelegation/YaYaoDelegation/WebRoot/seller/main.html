@@ -33,7 +33,7 @@
          </div>
          <div class="modal-footer">
          	<div id="errorSellerInfo" class="text-justify text-danger"></div>
-            <button type="button" class="button button-3d button-caution" id="sellerSubmit">
+            <button type="button" class="btn  btn-lg btn-success" id="sellerSubmit">
                提交
             </button>
          </div>
@@ -48,81 +48,9 @@
         <script src="/resources/js/sortable.min.js"></script>
        <script src="/resources/js/base64.js"></script> 
        <script src="/resources/js/base.js"></script> 
+       <script src="/resources/js/seller.js"></script> 
        <script type="text/javascript">
-       angular.module('mainApp', ['ngAnimate','ui.router'])
-       .config(function ($stateProvider, $urlRouterProvider) {
-     	$urlRouterProvider.when("", "main");
-     	$stateProvider
-     	.state("main", {
-            url: "/main",
-            views: {
-                '': {
-                    templateUrl: '/seller/templates/main.html'
-                },
-                'topbar@main': {
-                    templateUrl: '/seller/templates/topbar.html'
-                },
-                'leftbar@main': {
-                    templateUrl: '/seller/templates/leftbar.html',
-                    controller:function(){
-                    	myUtils.myClickRotate("a.toCaret","span.caret");//箭头旋转
-                    }
-                } ,
-                'rightbody@main': {
-                    templateUrl: '/seller/templates/notice.html'
-                } 
-            }
-        })
-         .state("main.notice", {
-            url:"/notice",
-            views: {
-            	'rightbody@main': {
-                    templateUrl: "/seller/templates/notice.html"
-                } 
-            }
-        })
-         .state("main.merCate", {
-            url:"/merCate",
-            views: {
-            	'rightbody@main': {
-                    templateUrl: "/seller/templates/mer_cate.html"
-                } 
-            }
-        })
-        .state("main.merInfo", {
-            url:"/merInfo",
-            views: {
-            	'rightbody@main': {
-                    templateUrl: "/seller/templates/mer_info.html"
-                } 
-            }
-        })
-        .state("main.merGroup", {
-            url:"/merGroup",
-            views: {
-            	'rightbody@main': {
-                    templateUrl: "/seller/templates/mer_group.html"
-                } 
-            }
-        })
-        .state("main.merDistribution", {
-            url:"/merDistribution",
-            views: {
-            	'rightbody@main': {
-                    templateUrl: "/seller/templates/mer_distribution.html"
-                } 
-            }
-        });
-		})
-       .controller('mainCtrl', function($scope,$http) {
-   		$scope.mainapp="2324324";
-   		$("#closeOrder").click(function(){
-   			//alert("sdf")
-   			$.post("/weixin/order/close",function(data){
-   				alert(data)
-   			});
-   		});			
-   		});			
+ 	
 		</script>
         </body>
 </html>

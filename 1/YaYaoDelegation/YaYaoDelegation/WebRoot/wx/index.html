@@ -16,19 +16,19 @@
 <body ng-app="indexApp">
 	<div ng-controller="indexCtrl" class="comment-wrap">
 		<!-- 商品列表 -->
-		<div class="list-group media comment-list-item" ng-repeat="merchandise in merchandiseList">
+		<div class="list-group media comment-list-item" ng-repeat="mer in merList">
 			<div class="media-left">
 				<a href="#"> <img class="media-object img-rounded comment-list-item-img "
-					ng-src="{{merchandise.merchandise_thumb_img||merchandiseInit.merchandise_thumb_img}}" >
+					ng-src="{{mer.mer_thumb_img||merInit.mer_thumb_img}}" >
 				</a>
 			</div>
 			<div class="media-body">
-				<div class="media-heading" ng-bind="merchandise.merchandise_title||merchandiseInit.merchandise_title"></div>
+				<div class="media-heading" ng-bind="mer.mer_title||merInit.mer_title"></div>
 				<div class="pull-left">
-					<div class="text-danger"><span ng-bind="merchandise.merchandise_person||merchandiseInit.merchandise_person"></span>人拼团价：￥<span ng-bind="merchandise.merchandise_price||merchandiseInit.merchandise_price"></span></div>
-					<div class="text-muted">已出售：<span ng-bind="merchandise.merchandise_stock||merchandiseInit.merchandise_stock"></span>件</div>
+					<div class="text-danger"><span ng-bind="mer.mer_person||merInit.mer_person"></span>人拼团价：￥<span ng-bind="mer.mer_price||merInit.mer_price"></span></div>
+					<div class="text-muted">已出售：<span ng-bind="mer.mer_stock||merInit.mer_stock"></span>件</div>
 				</div>
-				<a class="pull-right btn btn-danger" ng-href="/wx/mer_details?merchandise_id={{merchandise.merchandise_urlid||merchandiseInit.merchandise_urlid}}">立即开团</a>
+				<a class="pull-right btn btn-danger" ng-href="/wx/mer_details?seller_id={{mer.seller_id}}&mer_id={{mer.mer_urlid||merInit.mer_urlid}}">立即开团</a>
 			</div>
 		</div>
 		<!-- 商品列表end -->
@@ -66,50 +66,55 @@
 	<script>
     	var indexApp=angular.module('indexApp',[]);
     	indexApp.controller('indexCtrl',function($scope){
+    		myUtils.idNotExistence("seller_id", "/404");
     		//商品初始化
-    		$scope.merchandiseInit={
-    				merchandise_id:0,
-    				merchandise_thumb_img:'/resources/img/preLoding.jpg',
-        			merchandise_title:'正在加载中...',
-        			merchandise_person:'0',
-        			merchandise_oldprice:'0.00',
-        			merchandise_price:'0.00',
-        			merchandise_stock:'0',
-        			merchandise_urlid:'#'
+    		$scope.merInit={
+    				mer_id:0,
+    				mer_thumb_img:'/resources/img/preLoding.jpg',
+        			mer_title:'正在加载中...',
+        			mer_person:'0',
+        			mer_oldprice:'0.00',
+        			mer_price:'0.00',
+        			mer_stock:'0',
+        			mer_urlid:'#',
+        			seller_id:'#'
         			};
-    		console.log($scope.merchandiseInit.merchandise_img)
+    		console.log($scope.merInit.mer_img)
     		//$scope.u="123";
     		//商品数据列表
-    		$scope.merchandiseList=[
+    		$scope.merList=[
     		   {
-    			merchandise_id:1,
-    			merchandise_thumb_img:'http://www.yayao8.com/resources/img/YaYaoQRCode.jpg',
-    			merchandise_title:'[日志信息]',
-    			merchandise_person:'3',
-    			merchandise_oldprice:'55.00',
-    			merchandise_price:'22.36',
-    			merchandise_stock:'54',
-    			merchandise_urlid:'1'
+    			mer_id:1,
+    			mer_thumb_img:'http://www.yayao8.com/resources/img/YaYaoQRCode.jpg',
+    			mer_title:'[日志信息]',
+    			mer_person:'3',
+    			mer_oldprice:'55.00',
+    			mer_price:'22.36',
+    			mer_stock:'54',
+    			mer_urlid:'1',
+    			seller_id:'23'
     			},
     		   {
-    			merchandise_id:2,
-    			merchandise_thumb_img:'http://www.yayao8.com/resources/img/YaYaoQRCode.jpg',
-    			merchandise_title:'[日志信息gfdsgdfg]',
-    			merchandise_person:'5',
-    			merchandise_oldprice:'55.00',
-    			merchandise_price:'32.36',
-    			merchandise_stock:'22',
-    			merchandise_urlid:'2'
+    			mer_id:2,
+    			mer_thumb_img:'http://www.yayao8.com/resources/img/YaYaoQRCode.jpg',
+    			mer_title:'[日志信息gfdsgdfg]',
+    			mer_person:'5',
+    			mer_oldprice:'55.00',
+    			mer_price:'32.36',
+    			mer_stock:'22',
+    			mer_urlid:'2',
+    			seller_id:'23'
     			},
     		   {
-    			merchandise_id:3,
-    			merchandise_thumb_img:'',
-    			merchandise_title:null,
-    			merchandise_oldprice:'',
-    			merchandise_person:undefined,
-    			merchandise_price:'',
-    			merchandise_stock:'',
-    			merchandise_urlid:''
+    			mer_id:3,
+    			mer_thumb_img:'',
+    			mer_title:null,
+    			mer_oldprice:'',
+    			mer_person:undefined,
+    			mer_price:'',
+    			mer_stock:'',
+    			mer_urlid:'',
+    			seller_id:'23'
     			}];
     	});
     </script>

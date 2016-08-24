@@ -30,12 +30,12 @@ public class SMSInterface {
 	 */
     public static String SmsNumSend(String extend,String recNum,String freeSignName,String templateCode){
     	TaobaoClient client = new DefaultTaobaoClient(url, appkey, secret);
-		AlibabaAliqinFcSmsNumSendRequest req = new AlibabaAliqinFcSmsNumSendRequest();
+    	AlibabaAliqinFcSmsNumSendRequest  req = new AlibabaAliqinFcSmsNumSendRequest();
 		req.setExtend(extend);
 		req.setSmsType("normal");
 		req.setSmsFreeSignName(freeSignName);
 		req.setRecNum(recNum);
-		req.setSmsParamString("{\"code\":\""+extend+"\",\"phoneName\":\""+recNum+"\"}");
+		req.setSmsParamString("{\"code\":\""+extend+"\",\"product\":\""+recNum+"\"}");
 		req.setSmsTemplateCode(templateCode);
 		//req.setExtendCode("1234");
 		//req.setExtendName("1234");
@@ -79,7 +79,7 @@ public class SMSInterface {
     	
     }
     public static void main(String[] args) throws ApiException {
-    	System.out.println(SmsNumSend("5484","15111336587","商户注册","SMS_13026949"));
+    	System.out.println(SmsNumSend("12850481","15111336587","雅耀","SMS_13026946"));
     	//System.out.println(SmsNumQuery());
 	}
 }

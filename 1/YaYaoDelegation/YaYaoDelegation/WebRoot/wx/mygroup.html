@@ -53,28 +53,30 @@
 	<script>
 		var mygroupApp = angular.module('mygroupApp', []);
 		mygroupApp.controller('mygroupCtrl', function($scope) {
+			myUtils.idNotExistence("seller_id", "/404");
 			//当前商品数据
-			$scope.currentMerchandise={
-					merchandise_img:'/resources/sellerUpload/7/黑茶/百两茶/百两茶_01.jpg',
-        			merchandise_title:'惠茶，8人，团价24，佣金8%',
-        			merchandise_person:'5',
-        			merchandise_oldprice:'55.00',
-        			merchandise_price:'55.00',
-        			merchandise_sold:'22',
-        			merchandise_urlid:'#'
+			$scope.currentMer={
+					mer_img:'/resources/sellerUpload/7/黑茶/百两茶/百两茶_01.jpg',
+        			mer_title:'惠茶，8人，团价24，佣金8%',
+        			mer_person:'5',
+        			mer_oldprice:'55.00',
+        			mer_price:'55.00',
+        			mer_sold:'22',
+        			mer_urlid:'#',
+        			seller_id:'23'
         			}; 
 			//当前商品团长佣金
 			$scope.leader={
 				commission:'8.00'	
 			}; 
-			$scope.currentMerchandiseImgs=function(){
-				console.log(myUtils.GetQueryString("merchandise_id"));
+			$scope.currentMerImgs=function(){
+				console.log(myUtils.GetQueryString("mer_id"));
 			};
-			$scope.currentMerchandiseJoinGroup=function(){
-				console.log(myUtils.GetQueryString("merchandise_id"));
+			$scope.currentMerJoinGroup=function(){
+				console.log(myUtils.GetQueryString("mer_id"));
 			};
-			$scope.currentMerchandiseOpenGroup=function(){
-				console.log(myUtils.GetQueryString("merchandise_id"));
+			$scope.currentMerOpenGroup=function(){
+				console.log(myUtils.GetQueryString("mer_id"));
 			};
 		});
 	</script>

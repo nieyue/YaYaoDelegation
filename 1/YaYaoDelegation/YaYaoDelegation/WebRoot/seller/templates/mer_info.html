@@ -1,21 +1,21 @@
  	<!-- 商品管理 -->
-<div class="button-group" id="merBtnGroup">
-  <button type="button" class="button  button-3d button-primary" style="width:155px;">上架时间</button>
-  <button type="button" class="button button-3d button-primary" style="width:155px;">销量</button>
-  <button type="button" class="button button-3d button-primary"  style="width:155px;">库存</button>
-  <button type="button" class="button button-3d button-primary" style="width:155px;">已卖完</button>
-  <button type="button" class="button button-3d button-primary" style="width:155px;" id="offShelfMer">已下架</button>
- <button type="button" class="button button-3d button-caution" style="width:155px;" id="addMerchandiseBtn">+添加商品</button>
+<div class="button-group" id="merBtnGroup" style="margin-top:10px;">
+  <button type="button" class="btn  btn-success" style="width:155px;">上架时间</button>
+  <button type="button" class="btn  btn-success" style="width:155px;">销量</button>
+  <button type="button" class="btn  btn-success"  style="width:155px;">库存</button>
+  <button type="button" class="btn  btn-success" style="width:155px;">已卖完</button>
+  <button type="button" class="btn  btn-success" style="width:155px;" id="offShelfMer">已下架</button>
+ <button type="button" class="btn  btn-danger" style="width:155px;margin:10px 0;" id="addMerchandiseBtn">+添加商品</button>
  </div>
 <hr/>
 	<div class="checkbox-inline">
    <label><input type="checkbox" id="merchandiseCheckboxBoss" >全选</label>
 	</div>
 	&nbsp;&nbsp;已选中0件商品
-	<button type="button" class="button button-3d button-caution button-small " >批量删除</button>
-	<button type="button" class="button button-3d button-inverse button-small " >批量下架</button>
+	<button type="button" class="btn  btn-danger " >批量删除</button>
+	<button type="button" class="btn  btn-warning " >批量下架</button>
 <div style="overflow-x:auto;">
-<table class="table text-center table-mobile" id="merchandiseList">
+<table class="table text-center table-striped" id="merchandiseList">
  
  <thead>
       <tr class="myactive"> 
@@ -32,6 +32,18 @@
       </tr>
    </thead>
    <tbody>
+      <tr class="myactive" ng-repeat="a in [1,2,34,5,6,4]"> 
+         <td class="text-center">商品描述</td>
+         <td class="text-center">商品描述</td>
+         <td class="text-center">商品描述</td>
+         <td class="text-center">商品描述</td>
+         <td class="text-center">商品描述</td>
+         <td class="text-center">商品描述</td>
+         <td class="text-center">商品描述</td>
+         <td class="text-center">商品描述</td>
+         <td class="text-center">商品描述</td>
+         <td class="text-center">商品描述</td>
+      </tr>
      
    </tbody>
 </table>

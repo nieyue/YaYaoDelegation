@@ -63,6 +63,7 @@
 	<script>
 		var userApp = angular.module('userApp', ['ngAnimate']);
 		userApp.controller('userCtrl', function($scope,$http) {
+			myUtils.idNotExistence("seller_id", "/404");
 			//当前用户数据
 			$scope.userInit={
 					
