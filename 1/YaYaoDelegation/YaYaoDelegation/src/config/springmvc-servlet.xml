@@ -291,12 +291,18 @@
 		</mvc:interceptor>
 	</mvc:interceptors> -->
 	<!-- 拦截权限 -->
-	<!-- <mvc:interceptors>
+	 <mvc:interceptors>
 		<mvc:interceptor>
-			<mvc:mapping path="/**/*update*/**"/>
+			<mvc:mapping path="/mer**/update"/>
+			<mvc:mapping path="/mer**/add"/>
+			<mvc:mapping path="/mer**/**/delete"/>
 			<bean class="com.nieyue.interceptor.SellerControllerSessionInterceptor"></bean>
 		</mvc:interceptor>
-	</mvc:interceptors>   -->
+		<!-- <mvc:interceptor>
+				<mvc:mapping path="/user/**"/>
+				<bean class="com.nieyue.interceptor.UserControllerSessionInterceptor" ></bean>
+			</mvc:interceptor> -->
+	</mvc:interceptors>  
 	
 	<!-- 拦截器配置 -->
 	<!-- <mvc:interceptors > 配置Shiro拦截器，实现注册用户的注入 <mvc:interceptor > <mvc:mapping 

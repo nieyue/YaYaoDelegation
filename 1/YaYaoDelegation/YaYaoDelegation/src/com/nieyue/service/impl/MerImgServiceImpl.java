@@ -34,8 +34,8 @@ public class MerImgServiceImpl implements MerImgService {
 	 * @param merImg
 	 */
 	@Override
-	public boolean delMerImg(Integer merImgId) {
-		boolean b =merImgDao.delMerImg(merImgId);
+	public boolean delMerImg(Integer sellerId,Integer merImgId) {
+		boolean b =merImgDao.delMerImg(sellerId,merImgId);
 		return b ;
 	}
 	/**
@@ -61,9 +61,9 @@ public class MerImgServiceImpl implements MerImgService {
 	 * @param merImg
 	 */
 	@Override
-	public List<MerImg> browseMerImg(Integer merId, String orderName,
+	public List<MerImg> browseMerImgBySeller(Integer sellerId,Integer merId, String orderName,
 			String orderWay) {
-		List<MerImg> l = merImgDao.browseMerImg(merId, orderName, orderWay);
+		List<MerImg> l = merImgDao.browseMerImgBySeller(sellerId,merId, orderName, orderWay);
 		return l;
 	}
 	/**
@@ -71,14 +71,14 @@ public class MerImgServiceImpl implements MerImgService {
 	 * @param merImg
 	 */
 	@Override
-	public List<MerImg> browsePagingMerImg(Integer merId,int pageNum, int pageSize, String orderName, String orderWay) {
+	public List<MerImg> browsePagingMerImgBySeller(Integer sellerId,Integer merId,int pageNum, int pageSize, String orderName, String orderWay) {
 		if(pageNum<1){
 			pageNum=1;
 		}
 		if(pageSize<1){
 			pageSize=0;//没有数据
 		}
-		List<MerImg> l = merImgDao.browsePagingMerImg(merId,pageNum-1, pageSize, orderName, orderWay);
+		List<MerImg> l = merImgDao.browsePagingMerImgBySeller(sellerId,merId,pageNum-1, pageSize, orderName, orderWay);
 		return l;
 	}
 	/**

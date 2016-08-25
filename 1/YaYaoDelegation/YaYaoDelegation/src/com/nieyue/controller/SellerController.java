@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.nieyue.bean.Seller;
 import com.nieyue.bean.User;
 import com.nieyue.comments.MyValidator;
 import com.nieyue.dto.StateResult;
@@ -32,6 +33,7 @@ import com.nieyue.util.StatusCode;
  *
  */
 @Controller("sellerController")
+@RequestMapping(value="/seller")
 public class SellerController {
 	@Resource
 	private SellerService sellerService;
@@ -287,7 +289,7 @@ public class SellerController {
 	 * @return
 	 * @throws Exception 
 	 */
-	@RequestMapping(value = "/sellerLoginOut", method = {RequestMethod.GET,RequestMethod.POST})
+	@RequestMapping(value = "/loginOut", method = {RequestMethod.GET,RequestMethod.POST})
 	public @ResponseBody void sellerLoginOut(HttpSession session) {
 		if(session.getAttribute("seller")!=null){
 			session.invalidate();
@@ -336,5 +338,19 @@ public class SellerController {
 		return StatusCode.GetValueByKey(StatusCode.SUCCESS);
 	}
 	*/
-	
+	/**
+	 * test
+	 * 
+	 * @param user
+	 * @param session
+	 * @return
+	 * @throws Exception 
+	 */
+	@RequestMapping(value = "/login", method = {RequestMethod.GET,RequestMethod.POST})
+	public @ResponseBody void sellerLogin(HttpSession session) {
+			Seller seller=new Seller();
+			seller.setSellerId(23);
+			session.setAttribute("seller", seller);
+		
+	}
 }

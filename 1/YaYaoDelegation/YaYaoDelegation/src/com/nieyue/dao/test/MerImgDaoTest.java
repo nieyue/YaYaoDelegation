@@ -44,7 +44,7 @@ public class MerImgDaoTest {
 
 	@Test
 	public void testDelMerImg() {
-		merImgDao.delMerImg(1019);
+		merImgDao.delMerImg(23,1019);
 	}
 
 	@Test
@@ -67,14 +67,14 @@ public class MerImgDaoTest {
 	}
 
 	@Test
-	public void testBrowseMerImg() {
-		List<MerImg> l = merImgDao.browseMerImg(1001, "mer_img_update_time", "desc");
+	public void testBrowseMerImgBySeller() {
+		List<MerImg> l = merImgDao.browseMerImgBySeller(23,1001, "mer_img_update_time", "desc");
 		System.out.println(l);
 	}
 
 	@Test
-	public void testBrowsePagingMerImg() {
-		List<MerImg> l = merImgDao.browsePagingMerImg(1003, 2, 10, "mer_img_update_time", "desc");
+	public void testBrowsePagingMerImgBySeller() {
+		List<MerImg> l = merImgDao.browsePagingMerImgBySeller(23,1003, 2, 10, "mer_img_update_time", "desc");
 		System.out.println(l);
 	}
 

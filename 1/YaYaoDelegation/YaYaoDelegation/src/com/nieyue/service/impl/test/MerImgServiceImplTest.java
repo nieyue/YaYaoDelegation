@@ -43,7 +43,7 @@ public class MerImgServiceImplTest {
 
 	@Test
 	public void testDelMerImg() {
-		merImgService.delMerImg(1029);
+		merImgService.delMerImg(23,1029);
 	}
 
 	@Test
@@ -60,14 +60,14 @@ public class MerImgServiceImplTest {
 	}
 
 	@Test
-	public void testBrowseMerImg() {
-		List<MerImg> l = merImgService.browseMerImg(1001, "mer_img_update_time", "desc");
+	public void testBrowseMerImgBySeller() {
+		List<MerImg> l = merImgService.browseMerImgBySeller(23,1001, "mer_img_update_time", "desc");
 		System.out.println(l);
 	}
 
 	@Test
-	public void testBrowsePagingMerImg() {
-		List<MerImg> l = merImgService.browsePagingMerImg(1003, 0, -1, "mer_img_update_time", "desc");
+	public void testBrowsePagingMerImgBySeller() {
+		List<MerImg> l = merImgService.browsePagingMerImgBySeller(23,1003, 0, -1, "mer_img_update_time", "desc");
 		System.out.println(l);
 	}
 

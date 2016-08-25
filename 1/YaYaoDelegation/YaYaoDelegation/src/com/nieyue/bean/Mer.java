@@ -55,6 +55,10 @@ public class Mer implements Serializable {
 	 */
 	private Integer merStatus;
 	/**
+	 * 商品类型id
+	 */
+	private Integer merCateId;
+	/**
 	 * 商户id
 	 */
 	private Integer sellerId;
@@ -68,7 +72,8 @@ public class Mer implements Serializable {
 	public Mer(Integer merId, String merThumbImg, String merTitle,
 			Integer merPerson, Double merOldPrice, Double merPrice,
 			Integer merStock, Double merDiscount, Double merPostage,
-			Date merUpdateTime, Integer merStatus,Integer sellerId) {
+			Date merUpdateTime, Integer merStatus,Integer merCateId,
+			Integer sellerId) {
 		super();
 		this.merId = merId;
 		this.merThumbImg = merThumbImg;
@@ -81,6 +86,7 @@ public class Mer implements Serializable {
 		this.merPostage = merPostage;
 		this.merUpdateTime = merUpdateTime;
 		this.merStatus = merStatus;
+		this.merCateId=merCateId;
 		this.sellerId=sellerId;
 	}
 
@@ -202,16 +208,13 @@ public class Mer implements Serializable {
 		this.sellerId = sellerId;
 	}
 
+	public Integer getMerCateId() {
+		return merCateId;
+	}
 
-	@Override
-	public String toString() {
-		return "Mer [merId=" + merId + ", merThumbImg=" + merThumbImg
-				+ ", merTitle=" + merTitle + ", merPerson=" + merPerson
-				+ ", merOldPrice=" + merOldPrice + ", merPrice=" + merPrice
-				+ ", merStock=" + merStock + ", merDiscount=" + merDiscount
-				+ ", merPostage=" + merPostage +
-				", merUpdateTime=" + merUpdateTime + ", merStatus="
-				+ merStatus + ", sellerId=" + sellerId + "]";
+
+	public void setMerCateId(Integer merCateId) {
+		this.merCateId = merCateId;
 	}
 
 

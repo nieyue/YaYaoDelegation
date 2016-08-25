@@ -36,17 +36,19 @@ public class MerController {
 	 * @return
 	 */
 	@RequestMapping(value = "/list", method = {RequestMethod.GET,RequestMethod.POST})
-	public @ResponseBody List<Mer> browsePagingMer(
-			@RequestParam(value="pageNum",defaultValue="0",required=false)int pageNum,@RequestParam(value="pageSize",defaultValue="10",required=false) int pageSize,
-			@RequestParam(value="merStatus",defaultValue="0",required=false) Integer merStatus,
+	public @ResponseBody List<Mer> browsePagingMerBySeller(
+			@RequestParam(value="sellerId") Integer sellerId,
+			@RequestParam(value="merStatus",defaultValue="1",required=false) Integer merStatus,
+			@RequestParam(value="pageNum",defaultValue="0",required=false)int pageNum,
+			@RequestParam(value="pageSize",defaultValue="10",required=false) int pageSize,
 			@RequestParam(value="orderName",required=false,defaultValue="mer_id") String orderName,
 			@RequestParam(value="orderWay",required=false,defaultValue="asc") String orderWay,HttpSession session)  {
 			List<Mer> list = new ArrayList<Mer>();
-			if(pageNum==0 ||pageSize==0){//查询所有
-				list= merService.browseMer(merStatus, orderName,orderWay);
+			if(pageNum==0 || pageSize==0){//查询所有
+				list= merService.browseMerBySeller(sellerId,merStatus, orderName,orderWay);
 				return list;
 			}
-			list= merService.browsePagingMer(pageNum, pageSize, merStatus, orderName, orderWay);
+			list= merService.browsePagingMerBySeller(sellerId,merStatus,pageNum, pageSize, orderName, orderWay);
 			return list;
 	}
 	/**
@@ -72,8 +74,8 @@ public class MerController {
 	 * @return
 	 */
 	@RequestMapping(value = "/{merId}/delete", method = {RequestMethod.GET,RequestMethod.POST})
-	public @ResponseBody StateResult delMer(@PathVariable("merId") Integer merId,HttpSession session)  {
-		boolean dm = merService.delMer(merId);
+	public @ResponseBody StateResult delMer(@RequestParam(value="sellerId") Integer sellerId,@PathVariable("merId") Integer merId,HttpSession session)  {
+		boolean dm = merService.delMer(sellerId,merId);
 		return StateResult.getSR(dm);
 	}
 	/**
@@ -81,8 +83,8 @@ public class MerController {
 	 * @return
 	 */
 	@RequestMapping(value = "/count", method = {RequestMethod.GET,RequestMethod.POST})
-	public @ResponseBody int countRecord(@RequestParam(value="merStatus",required=false) Integer merStatus,HttpSession session)  {
-		int count = merService.countRecord(merStatus);
+	public @ResponseBody int countRecord(@RequestParam(value="sellerId") Integer sellerId,@RequestParam(value="merStatus",required=false) Integer merStatus,HttpSession session)  {
+		int count = merService.countRecordBySeller(sellerId,merStatus);
 		return count;
 	}
 	/**

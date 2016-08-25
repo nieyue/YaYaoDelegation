@@ -16,22 +16,26 @@ import com.nieyue.exception.MySellerSessionException;
  */
 public class SellerControllerSessionInterceptor implements HandlerInterceptor {
 
+	private static String getId(HttpServletRequest request,String id,String oid){
+		if(request.getParameter(id)!=null){
+			return request.getParameter(id);
+		}
+		return oid;
+	}
 	@Override
 	public boolean preHandle(HttpServletRequest request,
-			HttpServletResponse response, Object handler) throws Exception {
-	/*	String sellerId="";
-		if(request.getParameter("seller_id")!=null){
-			sellerId = request.getParameter("seller_id");
-			
+			HttpServletResponse response, Object handler) throws MySellerSessionException {
+		String sellerId="";
+		sellerId=getId(request, "seller_id",sellerId);
+		sellerId=getId(request, "sellerId",sellerId);
+		//不拦截系统管理员
+		if(request.getSession().getAttribute("admin")!=null){
+			return true;
 		}
-		if(request.getParameter("sellerId")!=null){
-			sellerId = request.getParameter("sellerId");
-			
-		}*/
-		if(request.getSession().getAttribute("seller")==null/*||!(((Seller)request.getSession().getAttribute("seller")).getSellerId().equals(Integer.valueOf(sellerId)))*/){
-			throw new MySellerSessionException();
-		}
+		if(request.getSession().getAttribute("seller")!=null && (((Seller)request.getSession().getAttribute("seller")).getSellerId().equals(Integer.valueOf(sellerId)))){
 		return true;
+		}
+		throw new MySellerSessionException();
 	}
 
 	@Override

@@ -34,8 +34,8 @@ public class MerServiceImpl implements MerService {
 	 * @param mer
 	 */
 	@Override
-	public boolean delMer(Integer merId) {
-		boolean b =merDao.delMer(merId);
+	public boolean delMer(Integer sellerId,Integer merId) {
+		boolean b =merDao.delMer(sellerId,merId);
 		return b ;
 	}
 	/**
@@ -61,9 +61,9 @@ public class MerServiceImpl implements MerService {
 	 * @param mer
 	 */
 	@Override
-	public List<Mer> browseMer(Integer merStatus, String orderName,
+	public List<Mer> browseMerBySeller(Integer sellerId,Integer merStatus, String orderName,
 			String orderWay) {
-		List<Mer> l = merDao.browseMer(merStatus, orderName, orderWay);
+		List<Mer> l = merDao.browseMerBySeller(sellerId,merStatus, orderName, orderWay);
 		return l;
 	}
 	/**
@@ -71,15 +71,15 @@ public class MerServiceImpl implements MerService {
 	 * @param mer
 	 */
 	@Override
-	public List<Mer> browsePagingMer(int pageNum, int pageSize,
-			Integer merStatus, String orderName, String orderWay) {
+	public List<Mer> browsePagingMerBySeller(Integer sellerId,Integer merStatus, int pageNum, int pageSize,
+			String orderName, String orderWay) {
 		if(pageNum<1){
 			pageNum=1;
 		}
 		if(pageSize<1){
 			pageSize=0;//没有数据
 		}
-		List<Mer> l = merDao.browsePagingMer(pageNum-1, pageSize, merStatus, orderName, orderWay);
+		List<Mer> l = merDao.browsePagingMerBySeller(sellerId,merStatus,pageNum-1, pageSize, orderName, orderWay);
 		return l;
 	}
 	/**
@@ -87,8 +87,8 @@ public class MerServiceImpl implements MerService {
 	 * @param mer
 	 */
 	@Override
-	public List<Mer> searchMer(String merTitle) {
-		List<Mer> l = merDao.searchMer(merTitle);
+	public List<Mer> searchMerBySeller(Integer sellerId,String merTitle) {
+		List<Mer> l = merDao.searchMerBySeller(sellerId,merTitle);
 		return l;
 	}
 	/**
@@ -96,8 +96,8 @@ public class MerServiceImpl implements MerService {
 	 * @param mer
 	 */
 	@Override
-	public int countRecord(Integer merStatus) {
-		int c = merDao.countRecord(merStatus);
+	public int countRecordBySeller(Integer sellerId,Integer merStatus) {
+		int c = merDao.countRecordBySeller(sellerId,merStatus);
 		return c;
 	}
 	

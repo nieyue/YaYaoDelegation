@@ -12,6 +12,7 @@
    		 <if test="merPostage!=null">mer_postage,</if>
    		 <if test="merUpdateTime!=null">mer_update_time,</if>
    		 <if test="merStatus!=null">mer_status,</if>
+   		 <if test="merCateId!=null">mer_cate_id,</if>
    		 seller_id)
    VALUES
     	 (#{merThumbImg},#{merTitle},#{merPerson},#{merOldPrice},#{merPrice},#{merStock},
@@ -19,6 +20,7 @@
     	 <if test="merPostage!=null">#{merPostage},</if>
     	 <if test="merUpdateTime!=null">#{merUpdateTime},</if>
     	 <if test="merStatus!=null">#{merStatus},</if>
+    	 <if test="merCateId!=null">#{merCateId},</if>
     	 #{sellerId})  
 </insert>  
 <!-- 更新商品 -->
@@ -36,14 +38,18 @@
     	mer_postage=#{merPostage},
     	mer_update_time=#{merUpdateTime},
     	mer_status=#{merStatus},
+    	mer_cate_id=#{merCateId},
     	seller_id=#{sellerId}
     WHERE
-    	 mer_id=#{merId}  
+    	 mer_id=#{merId}
+    AND seller_id=#{sellerId}  
 </update> 
 <!-- 删除商品-->
 <delete id="delMer"  parameterType="Integer" >  
     DELETE FROM
-    	 mer_tb WHERE mer_id=#{merId}
+    	 mer_tb 
+    	 WHERE mer_id=#{merId}
+    	 AND seller_id=#{sellerId} 
 </delete>  
 <!-- 加载单个商品-->
 <select id="loadMer" parameterType="Integer" resultType="Mer" >
@@ -59,12 +65,13 @@ SELECT
      mer_postage,
      mer_update_time,
      mer_status,
+     mer_cate_id,
      seller_id
 FROM mer_tb 
 WHERE mer_id=#{merId}
 </select>
 <!-- 分页查询商品 -->
-<select id="browsePagingMer" resultType="Mer">  
+<select id="browsePagingMerBySeller" resultType="Mer">  
     SELECT
 	       mer_id,
 		   mer_thumb_img,
@@ -77,16 +84,18 @@ WHERE mer_id=#{merId}
 		   mer_postage,
 		   mer_update_time,
 		   mer_status,
+		   mer_cate_id,
 		   seller_id
 	FROM mer_tb
 	WHERE mer_status=#{merStatus}
+	AND seller_id=#{sellerId}
 	ORDER BY
 		${orderName}  ${orderWay}
 	LIMIT
 		#{pageNum},#{pageSize}
 </select>
 <!-- 查询所有商品 -->
-<select id="browseMer" resultType="Mer">  
+<select id="browseMerBySeller" resultType="Mer">  
     SELECT
        mer_id,
 	   mer_thumb_img,
@@ -99,14 +108,16 @@ WHERE mer_id=#{merId}
 	   mer_postage,
 	   mer_update_time,
 	   mer_status,
+	   mer_cate_id,
 	   seller_id
 	FROM mer_tb
 	WHERE mer_status=#{merStatus}
+	AND seller_id=#{sellerId}
 	ORDER BY
 		${orderName} ${orderWay}
 </select>    
 <!-- 后台检索商品（按商品模糊名称） -->
-<select id="searchMer" parameterType="String" resultType="Mer">  
+<select id="searchMerBySeller"  resultType="Mer">  
     SELECT
        mer_id,
 	   mer_thumb_img,
@@ -119,16 +130,21 @@ WHERE mer_id=#{merId}
 	   mer_postage,
 	   mer_update_time,
 	   mer_status,
+	   mer_cate_id,
 	   seller_id  
 	FROM mer_tb
-	WHERE mer_title LIKE '%' #{merTitle} '%'
+	WHERE 
+	mer_title LIKE '%' #{merTitle} '%'
+	AND 
+	seller_id=#{sellerId}
 </select>    
 <!-- 统计记录条数 -->
-<select id="countRecord" parameterType="Integer"  resultType="int">  
+<select id="countRecordBySeller" parameterType="Integer"  resultType="int">  
 	SELECT
 	 	count(mer_id)
 	FROM mer_tb
 	WHERE mer_status=#{merStatus}
+	AND seller_id=#{sellerId}
 </select>    
  
 </mapper>

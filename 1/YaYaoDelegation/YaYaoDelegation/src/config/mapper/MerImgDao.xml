@@ -8,11 +8,13 @@
    INSERT IGNORE INTO
    		 mer_img_tb (mer_img_address,
    		 <if test="merImgUpdateTime!=null">mer_img_update_time,</if>
-   		 mer_id)
+   		 mer_id,
+   		 seller_id)
    VALUES
     	 (#{merImgAddress},
    		 <if test="merImgUpdateTime!=null">#{merImgUpdateTime},</if>
-    	 #{merId})  
+    	 #{merId},
+    	 #{sellerId})  
 </insert>  
 <!-- 更新商品图片 -->
 <update id="updateMerImg" parameterType="MerImg" >  
@@ -21,14 +23,18 @@
     SET 
     	mer_img_address=#{merImgAddress},
     	mer_img_update_time=#{merImgUpdateTime},
-    	mer_id=#{merId}
+    	mer_id=#{merId},
+    	seller_id=#{sellerId}
     WHERE
-    	 mer_img_id=#{merImgId}  
+    	 mer_img_id=#{merImgId}
+    AND  seller_id=#{sellerId}  
 </update> 
 <!-- 删除指定的商品 图片-->
 <delete id="delMerImg"  parameterType="Integer" >  
     DELETE FROM
-    	 mer_img_tb WHERE mer_img_id=#{merImgId}
+    	 mer_img_tb 
+    	 WHERE mer_img_id=#{merImgId}
+    	 AND  seller_id=#{sellerId}
 </delete>  
 <!-- 加载单个商品图片-->
 <select id="loadMerImg" parameterType="Integer" resultType="MerImg" >
@@ -51,7 +57,7 @@ FROM mer_img_tb
 WHERE mer_img_address=#{merImgAddress}
 </select>
 <!-- 分页浏览商品图片-->
-<select id="browsePagingMerImg" resultType="MerImg">  
+<select id="browsePagingMerImgBySeller" resultType="MerImg">  
     SELECT
 	      mer_img_id,
 		  mer_img_address,
@@ -59,13 +65,14 @@ WHERE mer_img_address=#{merImgAddress}
    		  mer_id
 	FROM mer_img_tb
 	WHERE mer_id=#{merId}
+	AND  seller_id=#{sellerId}
 	ORDER BY
 		${orderName}  ${orderWay}
 	LIMIT
 		#{pageNum},#{pageSize}
 </select>
 <!-- 查询所有商品图片 -->
-<select id="browseMerImg" resultType="MerImg">  
+<select id="browseMerImgBySeller" resultType="MerImg">  
     SELECT
           mer_img_id,
 		  mer_img_address,
@@ -73,6 +80,7 @@ WHERE mer_img_address=#{merImgAddress}
    		  mer_id
 	FROM mer_img_tb
 	WHERE mer_id=#{merId}
+	AND  seller_id=#{sellerId}
 	ORDER BY
 		${orderName} ${orderWay}
 </select>    

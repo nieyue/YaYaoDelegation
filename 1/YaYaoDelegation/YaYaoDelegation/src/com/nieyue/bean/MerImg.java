@@ -29,6 +29,10 @@ public class MerImg implements Serializable{
 	 * 商品id
 	 */
 	private Integer merId;
+	/**
+	 * 商户id
+	 */
+	private Integer sellerId;
 	
 	
 	public MerImg() {
@@ -37,12 +41,13 @@ public class MerImg implements Serializable{
 
 
 	public MerImg(Integer merImgId, String merImgAddress,
-			Date merImgUpdateTime, Integer merId) {
+			Date merImgUpdateTime, Integer merId,Integer sellerId) {
 		super();
 		this.merImgId = merImgId;
 		this.merImgAddress = merImgAddress;
 		this.merImgUpdateTime = merImgUpdateTime;
 		this.merId = merId;
+		this.sellerId=sellerId;
 	}
 
 
@@ -86,11 +91,13 @@ public class MerImg implements Serializable{
 	}
 
 
-	@Override
-	public String toString() {
-		return "MerImg [merImgId=" + merImgId + ", merImgAddress="
-				+ merImgAddress + ", merImgUpdateTime=" + merImgUpdateTime
-				+ ", merId=" + merId + "]";
+	public Integer getSellerId() {
+		return sellerId;
+	}
+
+
+	public void setSellerId(Integer sellerId) {
+		this.sellerId = sellerId;
 	}
 
 	

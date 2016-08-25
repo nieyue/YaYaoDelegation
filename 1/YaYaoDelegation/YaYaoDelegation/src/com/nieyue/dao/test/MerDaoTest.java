@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import net.sf.json.JSONObject;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -29,7 +31,7 @@ public class MerDaoTest {
 
 	@Test
 	public void testAddMer() {
-		for (int i = 0; i < 1; i++) {
+		for (int i = 0; i < 3; i++) {
 			Mer mer=new Mer();
 			if(Math.random()*10>5){
 				mer.setMerStatus(0);
@@ -40,6 +42,7 @@ public class MerDaoTest {
 		mer.setMerOldPrice(55.00);
 		mer.setMerPrice(50.00);
 		mer.setMerStock(999);
+		mer.setSellerId(23);
 		//mer.setMerDiscount(0.00);//默认1.00
 		//mer.setMerPostage(1.00);//默认0.00
 		//mer.setMerUpdateTime(new Date());//默认当前时间
@@ -50,29 +53,31 @@ public class MerDaoTest {
 
 	@Test
 	public void testDelMer() {
-		boolean b = merDao.delMer(1013);
+		boolean b = merDao.delMer(23,1014);
 		System.out.println(b);
 	}
 
 	@Test
 	public void testUpdateMer() {
-		//Mer mer = merDao.loadMer(1013);
-		Mer mer = new Mer();
-		mer.setMerId(1013);
-		mer.setMerStatus(1);
+		Mer mer = merDao.loadMer(1014);
+		//Mer mer = new Mer();
+		//mer.setMerId(1013);
+		System.out.println(mer.getMerStatus());
+		mer.setMerStatus(0);
+		System.out.println(mer.getMerStatus());
 		//mer.setMerUpdateTime(new Date());
 		merDao.updateMer(mer);
 	}
 
 	@Test
 	public void testLoadMer() {
-		Mer mer = merDao.loadMer(900);
-		System.out.println(mer);
+		Mer mer = merDao.loadMer(1014);
+		System.out.println(JSONObject.fromObject(mer));
 	}
 
 	@Test
 	public void testBrowseMer() {
-		List<Mer> list = merDao.browseMer(1, "mer_id", "desc");
+		List<Mer> list = merDao.browseMerBySeller(23,1, "mer_id", "desc");
 		for (int i = 0; i < list.size(); i++) {
 			Mer mer = list.get(i);
 			System.out.println(mer.getMerThumbImg());
@@ -81,7 +86,7 @@ public class MerDaoTest {
 
 	@Test
 	public void testBrowsePagingMer() {
-		List<Mer> list = merDao.browsePagingMer(3, 5, 1,"mer_id", "asc");
+		List<Mer> list = merDao.browsePagingMerBySeller(23,1, 3, 5,"mer_id", "asc");
 		for (int i = 0; i < list.size(); i++) {
 			Mer mer = list.get(i);
 			System.out.println(mer.getMerThumbImg());
@@ -90,7 +95,7 @@ public class MerDaoTest {
 
 	@Test
 	public void testSearchMer() {
-		List<Mer> list = merDao.searchMer("1");
+		List<Mer> list = merDao.searchMerBySeller(23,"4");
 		for (int i = 0; i < list.size(); i++) {
 			Mer mer = list.get(i);
 			System.out.println(mer.getMerThumbImg());
@@ -99,7 +104,7 @@ public class MerDaoTest {
 
 	@Test
 	public void testCountRecord() {
-		int c = merDao.countRecord(999);
+		int c = merDao.countRecordBySeller(23,1);
 		System.out.println(c);
 	}
 
