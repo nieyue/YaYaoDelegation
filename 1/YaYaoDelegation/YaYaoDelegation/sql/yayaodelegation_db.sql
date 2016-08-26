@@ -80,10 +80,15 @@ CREATE TABLE mer_img_tb(
 mer_img_id int(11) NOT NULL AUTO_INCREMENT COMMENT '商品图片id',
 mer_img_address varchar(255) COMMENT '商品图地址',
 mer_img_update_time timestamp DEFAULT CURRENT_TIMESTAMP COMMENT '商品图片更新时间',
+order int(11) COMMENT '排序数字',
 mer_id int(11) COMMENT '商品id,外键',
+seller_id int(11) COMMENT '商户id,外键',
 PRIMARY KEY (mer_img_id),
 CONSTRAINT FK_MER_MERIMG FOREIGN KEY (mer_id) REFERENCES mer_tb (mer_id) ON DELETE CASCADE ON UPDATE CASCADE,
+CONSTRAINT FK_SELLER_MERIMG FOREIGN KEY (seller_id) REFERENCES seller_tb (seller_id) ON DELETE CASCADE ON UPDATE CASCADE,
 INDEX idx_mer_id (mer_id) USING BTREE,
+INDEX idx_order (order) USING BTREE,
+INDEX idx_seller_id (seller_id) USING BTREE,
 INDEX idx_mer_img_update_time (mer_img_update_time) USING BTREE
 )ENGINE = InnoDB AUTO_INCREMENT=1000 DEFAULT CHARSET=utf8 COMMENT='商品图片表';
 

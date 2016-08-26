@@ -215,7 +215,122 @@
         		'': {
         			templateUrl: "/seller/templates/mer_add.html",
         			controller:function($scope,$state){
-        				$state.go("main.merInfo.merAdd"); 
+        				$state.go("main.merInfo.merAdd");
+        				//商品类型数据列表
+                    	myUtils.myPrevToast("加载中...", function(){
+                    	$.get("/merCate/list?seller_id="+myUtils.GetQueryString("seller_id"),function(data){
+                    	$scope.merCateList=data;
+                    	$scope.$apply();
+                    	myUtils.myPrevToast("加载完成",null,"remove");
+                    	});
+                    	});
+                    	//选择商品类型
+                    	$scope.addMerCateItem=function(){
+                    		console.log(this.merCate.mer_cate_id)
+                    		
+                    	};
+                    	$scope.merImgList=[];
+                    	//图片上传
+                    	$("#changeMerImgFile").unbind().change(function(){
+        					myUtils.fileUpload({
+            			    	inputfile:$(".drag-mer-file"),
+            			    	ajaxObj:
+            			    		{
+            	  		  				formData:[{key:"mer_file",value:$(".drag-mer-file").get(0).files[0]},{key:"seller_id",value:myUtils.GetQueryString("seller_id")}],
+            	  		  				url:"/merImg/add",
+            	  		  				success:function(merimg){
+            	  		  					console.log(merimg);
+            	  		  					
+            	  		                myUtils.myPrevToast("上传成功",null,"remove");
+            	  		            	//设定图片显示问题
+            	  		                $scope.merImgList.push(merimg);
+            	  		                $scope.$apply();
+            	  		  				}
+            	  		  				},
+            			    	dragFn:function(e){
+            			    	
+            			    		//sortable 更强大
+            			    		 Sortable.create(imgMerWarp, { 
+            			    		      handle: ".myDrag", 
+            			    		      animation: 150,
+            			    		      draggable:".myDrag",
+            			    		      filter: ".nodrag",
+            			    		      onEnd: function (/**Event*/evt) { // 拖拽
+            			    		          for (var int = 0; int < $(evt.target).children().length; int++) {
+            			    		        	  for (var j = 0; j < $scope.merImgList.length; j++) {
+            			    		        		  console.log($(evt.target).children().children("img").get(int).getAttribute("src"))
+            			    		        		  if($(evt.target).children().children("img").get(int).getAttribute("src")== $scope.merImgList[j].mer_img_address){
+            			    		        			  console.log(int)
+            			    		        			  $scope.merImgList[j].mer_id=int;
+            			    		        		  }
+												}
+											}
+            			    		        
+            			    		          $scope.$apply();
+            			    		          console.log($scope.merImgList)
+            			    		      }
+            			    		       });	
+            			    }});
+        			});
+        				
+        				//$scope.merImgList=[];
+        					/*[
+        				                   {
+        				                	   mer_img_id:33,
+        				                	   mer_img_address:"/resources/img/404.jpg"
+        				                   },
+        				                   {
+        				                	   mer_img_id:22,
+        				                	   mer_img_address:""
+        				                   }
+        				                   ];*/
+        				//修改图片点击事件
+        				$scope.replaceMerImg=function(){
+        					$scope.thismer_img_id=this.merImg.mer_img_id;
+        					$("#changeMerImgFile").click();
+        				};
+        				//上传修改图片
+        				$("#updateMerImgFile").unbind().change(function($scope){
+        					console.log($scope.thismer_img_id)
+        					var thismerimgid=$scope.thismer_img_id;
+        					myUtils.fileUpload({
+            			    	inputfile:$(".drag-mer-file"),
+            			    	ajaxObj:
+            			    		{
+            	  		  				formData:[{key:"mer_file",value:$(".drag-mer-file").get(0).files[0]},
+            	  		  				          {key:"seller_id",value:myUtils.GetQueryString("seller_id")},
+            	  		  				          {key:"mer_img_id",thismerimgid}
+            	  		  				          ],
+            	  		  				url:"/merImg/update",
+            	  		  				success:function(merimg){
+            	  		  					console.log(merimg);
+            	  		  					
+            	  		                myUtils.myPrevToast("修改成功",null,"remove");
+            	  		                console.log($scope.merImgList)
+            	  		            	//设定图片显示问题
+            	  		                for (var int = 0; int < $scope.merImgList.length; int++) {
+											if($scope.merImgList[int].mer_img_id==thismerimgid){
+												$scope.merImgList.remove($scope.merImgList[int]);
+											}
+										}
+            	  		                $scope.merImgList.push(merimg);
+            	  		                $scope.$apply();
+            	  		  				}
+            	  		  				},
+            			    	dragFn:function(e){
+            			    	
+            			    		//sortable 更强大
+            			    		 Sortable.create(imgMerWarp, { 
+            			    		      handle: ".myDrag", 
+            			    		      animation: 150,
+            			    		      draggable:".myDrag",
+            			    		      filter: ".nodrag"
+            			    		       });	
+            			    		 
+            			    }});
+        					
+        				});
+        				
         			}
         		} 
         	}

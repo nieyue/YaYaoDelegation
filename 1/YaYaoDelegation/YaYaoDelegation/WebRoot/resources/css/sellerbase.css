@@ -327,7 +327,7 @@ a:hover{
 */
 .seller-main-body{
 	border:1px solid #fff;
-	min-height:800px;
+	min-height:1000px;
 	width:1100px;
 	margin:auto;
 	background-color:#fff;
@@ -391,4 +391,68 @@ a:hover{
 .right-bar{
 	width:820px;
 	height:100%;
+}
+/**
+**添加商品
+*/
+.drag-mer-warp{
+	display: inline-block;
+	margin:5px;
+}
+.drag-mer-file-btn{
+	color:#ccc;
+	display:inline-block;
+	height:100px;
+	width:100px;
+	border:1px dotted #ccc;
+	text-align:center;
+	line-height:100px;
+	margin:10px;
+}
+.drag-mer-img-warp{
+	position:relative;
+	left:0;
+	top:0;
+	width:100px;
+	height:100px;
+	margin:5px;
+	display:inline-block;
+}
+.drag-mer-img{
+	width:100px;
+	height:100px;
+	line-height:100px;
+	cursor:move;
+	z-index:9999;
+}
+.drag-mer-file{
+	width:100px;
+	height:100px;
+	display:none !important;
+}
+.drag-mer-img-inner{
+	display:block;
+	width:100px;
+	height:50px; 
+	line-height:40px;
+	cursor:pointer;
+	z-index:99999;
+	position:absolute;
+	padding:5px;
+	bottom:0;
+	font-size:1.5rem;
+	left:0;
+	opacity:0;
+}
+.drag-mer-img-inner:hover{
+	opacity:0.8;
+	background-color:white;
+	border: 1px solid #ccc;
+}
+.divback{
+	width:100px;
+	height:100px;
+	margin:0 0 -45px 0;
+	border:1px solid #ccc;
+	display:inline-block;
 }

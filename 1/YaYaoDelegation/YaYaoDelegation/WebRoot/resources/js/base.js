@@ -387,7 +387,7 @@ var myUtils = {
 		       fileSize = file.files[0].size;     
 		  } 
 		  fileSize=Math.round(fileSize/1024*100/1024)/100; // 单位为MB
-		  if(fileSize>=20){
+		  if(fileSize>=2){
 			  alert("图片大小为"+fileSize+"MB，超过最大尺寸为2MB，请重新上传!");
 		      return false;
 		  }		  
