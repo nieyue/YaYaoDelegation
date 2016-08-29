@@ -28,7 +28,7 @@ public class MerImg implements Serializable{
 	/**
 	 * 排序
 	 */
-	private Integer order;
+	private Integer orderNum;
 	/**
 	 * 商品id
 	 */
@@ -45,12 +45,12 @@ public class MerImg implements Serializable{
 
 
 	public MerImg(Integer merImgId, String merImgAddress,Date merImgUpdateTime,
-			Integer order,Integer merId,Integer sellerId) {
+			Integer orderNum,Integer merId,Integer sellerId) {
 		super();
 		this.merImgId = merImgId;
 		this.merImgAddress = merImgAddress;
 		this.merImgUpdateTime = merImgUpdateTime;
-		this.order = order;
+		this.orderNum = orderNum;
 		this.merId = merId;
 		this.sellerId=sellerId;
 	}
@@ -105,14 +105,13 @@ public class MerImg implements Serializable{
 		this.sellerId = sellerId;
 	}
 
-
-	public Integer getOrder() {
-		return order;
+	public Integer getOrderNum() {
+		return orderNum;
 	}
 
 
-	public void setOrder(Integer order) {
-		this.order = order;
+	public void setOrderNum(Integer orderNum) {
+		this.orderNum = orderNum;
 	}
 
 	

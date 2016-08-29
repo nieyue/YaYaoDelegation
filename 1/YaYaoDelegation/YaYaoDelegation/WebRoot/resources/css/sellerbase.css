@@ -424,6 +424,7 @@ a:hover{
 	line-height:100px;
 	cursor:move;
 	z-index:9999;
+	border:1px solid #ccc;
 }
 .drag-mer-file{
 	width:100px;

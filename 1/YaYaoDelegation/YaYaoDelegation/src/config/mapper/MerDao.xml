@@ -7,7 +7,7 @@
 <insert id="addMer" parameterType="Mer" flushCache="true"  >  
    INSERT IGNORE INTO
    		mer_tb 
-   		 (mer_thumb_img,mer_title,mer_person,mer_old_price,mer_price,mer_stock,
+   		 (mer_thumb_img,mer_title,mer_person,mer_old_price,mer_price,mer_stock,mer_code,
    		 <if test="merDiscount!=null">mer_discount,</if>
    		 <if test="merPostage!=null">mer_postage,</if>
    		 <if test="merUpdateTime!=null">mer_update_time,</if>
@@ -15,7 +15,7 @@
    		 <if test="merCateId!=null">mer_cate_id,</if>
    		 seller_id)
    VALUES
-    	 (#{merThumbImg},#{merTitle},#{merPerson},#{merOldPrice},#{merPrice},#{merStock},
+    	 (#{merThumbImg},#{merTitle},#{merPerson},#{merOldPrice},#{merPrice},#{merStock},#{merCode},
     	 <if test="merDiscount!=null">#{merDiscount},</if>
     	 <if test="merPostage!=null">#{merPostage},</if>
     	 <if test="merUpdateTime!=null">#{merUpdateTime},</if>
@@ -34,6 +34,7 @@
     	mer_old_price=#{merOldPrice},
     	mer_price=#{merPrice},
     	mer_stock=#{merStock},
+    	mer_code=#{merStock},
     	mer_discount=#{merDiscount},
     	mer_postage=#{merPostage},
     	mer_update_time=#{merUpdateTime},
@@ -61,6 +62,7 @@ SELECT
      mer_old_price,
      mer_price,
      mer_stock,
+     mer_code,
      mer_discount,
      mer_postage,
      mer_update_time,
@@ -80,6 +82,7 @@ WHERE mer_id=#{merId}
 		   mer_old_price,
 		   mer_price,
 		   mer_stock,
+		   mer_code,
 		   mer_discount,
 		   mer_postage,
 		   mer_update_time,
@@ -104,6 +107,7 @@ WHERE mer_id=#{merId}
 	   mer_old_price,
 	   mer_price,
 	   mer_stock,
+	   mer_code,
 	   mer_discount,
 	   mer_postage,
 	   mer_update_time,
@@ -126,6 +130,7 @@ WHERE mer_id=#{merId}
 	   mer_old_price,
 	   mer_price,
 	   mer_stock,
+	   mer_code,
 	   mer_discount,
 	   mer_postage,
 	   mer_update_time,

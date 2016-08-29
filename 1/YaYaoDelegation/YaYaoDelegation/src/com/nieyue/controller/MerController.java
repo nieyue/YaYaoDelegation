@@ -1,11 +1,17 @@
 package com.nieyue.controller;
 
+import java.lang.reflect.InvocationTargetException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+
+import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,8 +21,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.nieyue.bean.Mer;
+import com.nieyue.bean.MerImg;
 import com.nieyue.dto.StateResult;
+import com.nieyue.service.MerImgService;
 import com.nieyue.service.MerService;
+import com.nieyue.util.DateUtil;
 
 /**
  * 商品控制类
@@ -28,6 +37,8 @@ import com.nieyue.service.MerService;
 public class MerController {
 	@Resource
 	private MerService merService;
+	@Resource
+	private MerImgService merImgService;
 	/**
 	 * 分页浏览商家的获取所有商品
 	 * @param merStatus 上架1 下架0
@@ -63,10 +74,32 @@ public class MerController {
 	/**
 	 * 商品增加
 	 * @return
+	 * @throws InvocationTargetException 
+	 * @throws IllegalAccessException 
+	 * @throws ParseException 
 	 */
 	@RequestMapping(value = "/add", method = {RequestMethod.GET,RequestMethod.POST})
-	public @ResponseBody StateResult addMer(@ModelAttribute Mer mer, HttpSession session)  {
+	public @ResponseBody StateResult addMer(@ModelAttribute Mer mer, @RequestParam("merImgList") String merImgList,  HttpSession session) throws IllegalAccessException, InvocationTargetException, ParseException  {
 		boolean am = merService.addMer(mer);
+		if(am){
+			JSONArray json=JSONArray.fromObject(merImgList);
+			for (int i = 0; i < json.size(); i++) {
+				MerImg merImg = new MerImg();
+				JSONObject jo = JSONObject.fromObject(json.get(i));
+				Integer merImgId = (Integer) jo.get("mer_img_id");
+				String merImgAddress = (String) jo.get("mer_img_address");
+				String merImgUpdateTime = (String) jo.get("mer_img_update_time");
+				Integer orderNum = (Integer) jo.get("order_num");
+				Integer sellerId = (Integer) jo.get("seller_id");
+				merImg.setMerImgId(merImgId);
+				merImg.setMerImgAddress(merImgAddress);
+				merImg.setMerImgUpdateTime(DateUtil.parseDate(merImgUpdateTime));
+				merImg.setOrderNum(orderNum);
+				merImg.setMerId(mer.getMerId());
+				merImg.setSellerId(sellerId);
+				merImgService.updateMerImg(merImg);
+			}
+		}
 		return StateResult.getSR(am);
 	}
 	/**

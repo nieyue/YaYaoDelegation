@@ -1,5 +1,6 @@
 package com.nieyue.dao.test;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -31,13 +32,15 @@ public class MerImgDaoTest {
 
 	@Test
 	public void testAddMerImg() {
-		for (int j = 0; j < 10; j++) {
+		for (int j = 0; j < 2; j++) {
 			MerImg mi=new MerImg();
 			mi.setMerId(1003);
 			if(Math.random()*10>5){
 				mi.setMerId(1004);
 			}
-			mi.setMerImgAddress("/resources/sellerUpload/7/黑茶/百两茶/百两茶_"+j+".jpg");
+			//mi.setMerImgAddress("/resources/sellerUpload/7/黑茶/百两茶/百两茶_"+j+".jpg");
+			mi.setMerImgAddress("jpg");
+			mi.setSellerId(23);
 			merImgDao.addMerImg(mi);
 		}
 	}
@@ -49,14 +52,17 @@ public class MerImgDaoTest {
 
 	@Test
 	public void testUpdateMerImg() {
-		MerImg merImg = merImgDao.loadMerImg(1018);
-		merImg.setMerImgAddress("sdfdsf");
-		merImgDao.updateMerImg(merImg);
+		MerImg merImg = merImgDao.loadMerImg(1091);
+		merImg.setMerImgAddress("sdfdsf11");
+		merImg.setSellerId(23);
+		boolean l = merImgDao.updateMerImg(merImg);
+		
+		System.out.println(l);
 	}
 
 	@Test
 	public void testLoadMerImg() {
-		MerImg merImg = merImgDao.loadMerImg(1018);
+		MerImg merImg = merImgDao.loadMerImg(1002);
 		System.out.println(merImg.getMerImgAddress());
 	}
 

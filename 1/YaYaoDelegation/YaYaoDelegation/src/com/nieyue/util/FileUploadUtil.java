@@ -171,7 +171,10 @@ public class FileUploadUtil {
             fileName = DateUtil.timeStamp()+ file.getOriginalFilename();  
           //删除原图片
             if(oldImgUrl!=null){
-         	String oldpath = session.getServletContext().getRealPath("/");
+            	String oldpath=path;
+         	   if(oldpath==null){
+         		oldpath = session.getServletContext().getRealPath("/");
+         	   }
             final File oldfile = new File(oldpath,oldImgUrl);  
             new Thread(new Runnable(){
  				public void run() {

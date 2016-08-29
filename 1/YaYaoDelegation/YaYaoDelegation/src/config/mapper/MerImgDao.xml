@@ -8,13 +8,13 @@
    INSERT IGNORE INTO
    		 mer_img_tb (mer_img_address,
    		 <if test="merImgUpdateTime!=null">mer_img_update_time,</if>
-   		 order,
+   		 order_num,
    		 mer_id,
    		 seller_id)
    VALUES
     	 (#{merImgAddress},
    		 <if test="merImgUpdateTime!=null">#{merImgUpdateTime},</if>
-    	 #{order},
+   		 #{orderNum},
     	 #{merId},
     	 #{sellerId})  
 </insert>  
@@ -25,7 +25,7 @@
     SET 
     	mer_img_address=#{merImgAddress},
     	mer_img_update_time=#{merImgUpdateTime},
-    	order=#{order},
+    	order_num=#{orderNum},
     	mer_id=#{merId},
     	seller_id=#{sellerId}
     WHERE
@@ -45,7 +45,7 @@ SELECT
 	 mer_img_id,
 	 mer_img_address,
      mer_img_update_time,
-     order,
+     order_num,
      mer_id,
      seller_id
 FROM mer_img_tb 
@@ -57,7 +57,7 @@ SELECT
 	 mer_img_id,
 	 mer_img_address,
      mer_img_update_time,
-     order,
+     order_num,
      mer_id,
      seller_id
 FROM mer_img_tb 
@@ -69,7 +69,7 @@ WHERE mer_img_address=#{merImgAddress}
 	      mer_img_id,
 		  mer_img_address,
      	  mer_img_update_time,
-     	  order,
+     	  order_num,
    		  mer_id,
      	  seller_id
 	FROM mer_img_tb
@@ -86,7 +86,7 @@ WHERE mer_img_address=#{merImgAddress}
           mer_img_id,
 		  mer_img_address,
      	  mer_img_update_time,
-     	  order,
+     	  order_num,
    		  mer_id,
      	  seller_id
 	FROM mer_img_tb

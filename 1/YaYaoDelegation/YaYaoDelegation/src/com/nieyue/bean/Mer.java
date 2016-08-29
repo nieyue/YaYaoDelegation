@@ -39,6 +39,10 @@ public class Mer implements Serializable {
 	 */
 	private Integer merStock;
 	/**
+	 * 商品编码
+	 */
+	private String merCode;
+	/**
 	 * 折扣
 	 */
 	private Double merDiscount;
@@ -71,9 +75,9 @@ public class Mer implements Serializable {
 
 	public Mer(Integer merId, String merThumbImg, String merTitle,
 			Integer merPerson, Double merOldPrice, Double merPrice,
-			Integer merStock, Double merDiscount, Double merPostage,
-			Date merUpdateTime, Integer merStatus,Integer merCateId,
-			Integer sellerId) {
+			Integer merStock,String merCode, Double merDiscount,
+			Double merPostage,Date merUpdateTime, Integer merStatus,
+			Integer merCateId,Integer sellerId) {
 		super();
 		this.merId = merId;
 		this.merThumbImg = merThumbImg;
@@ -82,6 +86,7 @@ public class Mer implements Serializable {
 		this.merOldPrice = merOldPrice;
 		this.merPrice = merPrice;
 		this.merStock = merStock;
+		this.merCode=merCode;
 		this.merDiscount = merDiscount;
 		this.merPostage = merPostage;
 		this.merUpdateTime = merUpdateTime;
@@ -215,6 +220,16 @@ public class Mer implements Serializable {
 
 	public void setMerCateId(Integer merCateId) {
 		this.merCateId = merCateId;
+	}
+
+
+	public String getMerCode() {
+		return merCode;
+	}
+
+
+	public void setMerCode(String merCode) {
+		this.merCode = merCode;
 	}
 
 
