@@ -20,35 +20,44 @@ public class FightGroup implements Serializable {
 	/**
 	 * 拼团队长id
 	 */
-	private Integer userId;
+	private Integer merGroupId;
 	/**
-	 * 开团次数
+	 * 商品id
 	 */
-	private Integer openNum;
+	private Integer merId;
 	/**
-	 * 参团人数
+	 * 开团人数
 	 */
-	private Integer joinNum;
+	private Integer openPerson;
 	/**
-	 * 已经成团次数
+	 * 已参团人数
 	 */
-	private Integer successNum;
+	private Integer joinPerson;
+	
 	/**
-	 * 已经拼团失败次数
+	 * 团长佣金比例
 	 */
-	private Integer faileNum;
+	private Integer merGroupDiscount;
 	/**
-	 * 业绩
+	 * 团长佣金
 	 */
-	private Double performance;
+	private Double merGroupCommission;
 	/**
-	 * 获得佣金
+	 * 是否免单0,不免， 1,免单
 	 */
-	private Double commission;
+	private Integer isFree;
 	/**
-	 * 免单次数
+	 * 开团时间
 	 */
-	private Integer freeNum;
+	private Integer openGroupTime;
+	/**
+	 * 是否成功 0,失败， 1,成功
+	 */
+	private Integer isSuccess;
+	/**
+	 * sellerId
+	 */
+	private Integer sellerId;
 	
 	
 	public FightGroup() {
@@ -56,19 +65,22 @@ public class FightGroup implements Serializable {
 	}
 
 
-	public FightGroup(Integer fightGroupId, Integer userId, Integer openNum,
-			Integer joinNum, Integer successNum, Integer faileNum,
-			Double performance, Double commission, Integer freeNum) {
+	public FightGroup(Integer fightGroupId, Integer merGroupId, Integer merId,
+			Integer openPerson, Integer joinPerson, Integer merGroupDiscount,
+			Double merGroupCommission, Integer isFree, Integer openGroupTime,
+			Integer isSuccess,Integer sellerId) {
 		super();
 		this.fightGroupId = fightGroupId;
-		this.userId = userId;
-		this.openNum = openNum;
-		this.joinNum = joinNum;
-		this.successNum = successNum;
-		this.faileNum = faileNum;
-		this.performance = performance;
-		this.commission = commission;
-		this.freeNum = freeNum;
+		this.merGroupId = merGroupId;
+		this.merId = merId;
+		this.openPerson = openPerson;
+		this.joinPerson = joinPerson;
+		this.merGroupDiscount = merGroupDiscount;
+		this.merGroupCommission = merGroupCommission;
+		this.isFree = isFree;
+		this.openGroupTime = openGroupTime;
+		this.isSuccess = isSuccess;
+		this.sellerId=sellerId;
 	}
 
 
@@ -82,84 +94,106 @@ public class FightGroup implements Serializable {
 	}
 
 
-	public Integer getUserId() {
-		return userId;
+	public Integer getMerGroupId() {
+		return merGroupId;
 	}
 
 
-	public void setUserId(Integer userId) {
-		this.userId = userId;
+	public void setMerGroupId(Integer merGroupId) {
+		this.merGroupId = merGroupId;
 	}
 
 
-	public Integer getOpenNum() {
-		return openNum;
+	public Integer getMerId() {
+		return merId;
 	}
 
 
-	public void setOpenNum(Integer openNum) {
-		this.openNum = openNum;
+	public void setMerId(Integer merId) {
+		this.merId = merId;
 	}
 
 
-	public Integer getJoinNum() {
-		return joinNum;
+	public Integer getOpenPerson() {
+		return openPerson;
 	}
 
 
-	public void setJoinNum(Integer joinNum) {
-		this.joinNum = joinNum;
+	public void setOpenPerson(Integer openPerson) {
+		this.openPerson = openPerson;
 	}
 
 
-	public Integer getSuccessNum() {
-		return successNum;
+	public Integer getJoinPerson() {
+		return joinPerson;
 	}
 
 
-	public void setSuccessNum(Integer successNum) {
-		this.successNum = successNum;
+	public void setJoinPerson(Integer joinPerson) {
+		this.joinPerson = joinPerson;
 	}
 
 
-	public Integer getFaileNum() {
-		return faileNum;
+	public Integer getMerGroupDiscount() {
+		return merGroupDiscount;
 	}
 
 
-	public void setFaileNum(Integer faileNum) {
-		this.faileNum = faileNum;
+	public void setMerGroupDiscount(Integer merGroupDiscount) {
+		this.merGroupDiscount = merGroupDiscount;
 	}
 
 
-	public Double getPerformance() {
-		return performance;
+	public Double getMerGroupCommission() {
+		return merGroupCommission;
 	}
 
 
-	public void setPerformance(Double performance) {
-		this.performance = performance;
+	public void setMerGroupCommission(Double merGroupCommission) {
+		this.merGroupCommission = merGroupCommission;
 	}
 
 
-	public Double getCommission() {
-		return commission;
+	public Integer getIsFree() {
+		return isFree;
 	}
 
 
-	public void setCommission(Double commission) {
-		this.commission = commission;
+	public void setIsFree(Integer isFree) {
+		this.isFree = isFree;
 	}
 
 
-	public Integer getFreeNum() {
-		return freeNum;
+	public Integer getOpenGroupTime() {
+		return openGroupTime;
 	}
 
 
-	public void setFreeNum(Integer freeNum) {
-		this.freeNum = freeNum;
+	public void setOpenGroupTime(Integer openGroupTime) {
+		this.openGroupTime = openGroupTime;
 	}
-	
-	
+
+
+	public Integer getIsSuccess() {
+		return isSuccess;
+	}
+
+
+	public void setIsSuccess(Integer isSuccess) {
+		this.isSuccess = isSuccess;
+	}
+	public static void main(String[] args) {
+		System.out.println(serialVersionUID);
+		
+	}
+
+
+	public Integer getSellerId() {
+		return sellerId;
+	}
+
+
+	public void setSellerId(Integer sellerId) {
+		this.sellerId = sellerId;
+	}
 }

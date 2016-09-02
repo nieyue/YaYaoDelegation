@@ -16,6 +16,8 @@ var myUtils = {
 	 * 验证规则
 	 */	
 	userVerification:{
+		merPostage:/^(0|100|([1-9]\d{0,1}))$/,//0-100邮费
+		merStock:/^(0|([1-9]\d{0,2}))$/,//0-999
 		username:/(^[\u4E00-\u9FA5]{2,16}$)|(^[a-zA-Z\/ ]{2,16}$)/,//中文或英文2-16位
 		merDiscount:/^(0\.(0[1-9]{1}|[1-9]\d?)|1(\.0{1,2})?)$/,//0.01-1.00之间
 		merPrice:/(^[+]?[1-9]\d*(\.\d{1,2})?$)|(^[+]?[0]{1}(\.\d{1,2})?$)/,//商品价格正则,大于0最多两位小数
@@ -415,6 +417,7 @@ var myUtils = {
 			                  contentType:false, // 告诉jQuery不要去设置Content-Type请求头
 			                  success:function(src){// 获取最新图片更新
 			                	  if(typeof options.ajaxObj.success=='function'){
+			                		  options.inputfile.val("");//清空input file内容值
 			                		  options.ajaxObj.success(src);
 			      	      		}
 			                  },

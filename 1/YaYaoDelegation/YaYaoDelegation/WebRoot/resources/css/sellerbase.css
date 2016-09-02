@@ -7,7 +7,27 @@ body,html{
 	font-family: "Helvetica Neue","Hiragino Sans GB","Microsoft YaHei","\9ED1\4F53","Arial,sans-serif";
 	font-size:14px;
 }
-
+/**
+**修改验证样式
+*/
+.has-error .form-control{
+	border-color:red ;
+}
+.has-error .form-control-feedback{
+	color:red;
+}
+.has-error .control-label{
+	color:#000;
+}
+.has-success .form-control{
+	border-color:#BBFFBB ;
+}
+.has-success .form-control-feedback{
+	color:#BBFFBB;
+}
+.has-success .control-label{
+	color:#000;
+}
 /**
 **修改模态框位置
 */
@@ -408,6 +428,7 @@ a:hover{
 	text-align:center;
 	line-height:100px;
 	margin:10px;
+	cursor:Crosshair;
 }
 .drag-mer-img-warp{
 	position:relative;

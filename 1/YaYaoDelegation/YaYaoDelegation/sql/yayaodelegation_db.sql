@@ -20,6 +20,22 @@ INDEX idx_reg_time (reg_time) USING BTREE,
 INDEX idx_last_login_time (last_login_time) USING BTREE
 )ENGINE = InnoDB AUTO_INCREMENT=1000 DEFAULT CHARSET=utf8 COMMENT='用户表';
 
+#创建团长表 
+CREATE TABLE mer_group_tb(
+mer_group_id int(11) NOT NULL AUTO_INCREMENT COMMENT '商品团长id',
+open_num int(11) COMMENT '开团次数',
+join_num int(11) COMMENT '参团人数(总，只算成团人数)',
+success_num int(11) COMMENT '已经成团次数',
+faile_num int(11) COMMENT '已经拼团失败次数',
+performance decimal(10,2) COMMENT '业绩',
+commission decimal(10,2) COMMENT '获得佣金',
+free_num int(11) COMMENT '免单次数',
+user_id int(11) COMMENT '用户id',
+PRIMARY KEY (mer_group_id),
+CONSTRAINT FK_USER_MERGROUP FOREIGN KEY (user_id) REFERENCES user_tb (user_id) ON DELETE CASCADE ON UPDATE CASCADE,
+INDEX idx_user_id (user_id) USING BTREE
+)ENGINE = InnoDB AUTO_INCREMENT=1000 DEFAULT CHARSET=utf8 COMMENT='团长表';
+
 #创建商户表 
 CREATE TABLE seller_tb(
 seller_id int(11) NOT NULL AUTO_INCREMENT COMMENT '商户id',
@@ -56,9 +72,8 @@ CREATE TABLE mer_tb(
 mer_id int(11) NOT NULL AUTO_INCREMENT COMMENT '商品id',
 mer_thumb_img varchar(255) COMMENT '商品缩略图',
 mer_title varchar(255) COMMENT '商品名称',
-mer_person int(11) COMMENT '商品拼团人数',
 mer_old_price decimal(10,2) COMMENT '原始价格',
-mer_price decimal(10,2) COMMENT '拼团价格',
+mer_price decimal(10,2) COMMENT '销售价格',
 mer_stock int(11) COMMENT '库存',
 mer_code varchar(255) COMMENT '商品编码',
 mer_discount decimal(10,2) DEFAULT 1.00 COMMENT '折扣',
@@ -67,12 +82,14 @@ mer_update_time timestamp  DEFAULT CURRENT_TIMESTAMP COMMENT '商品更新时间
 mer_status tinyint(4) DEFAULT 1 COMMENT '上架1，下架0',
 mer_cate_id int(11) COMMENT '商品类型id,外键',
 seller_id int(11) COMMENT '商户id,外键',
+mer_img_identify varchar(255) COMMENT '商品图片标识',
 PRIMARY KEY (mer_id),
 CONSTRAINT FK_SELLER_MER FOREIGN KEY (seller_id) REFERENCES seller_tb (seller_id) ON DELETE CASCADE ON UPDATE CASCADE,
 CONSTRAINT FK_MERCATE_MER FOREIGN KEY (mer_cate_id) REFERENCES mer_cate_tb (mer_cate_id) ON DELETE CASCADE ON UPDATE CASCADE,
 INDEX idx_mer_cate_id (mer_cate_id) USING BTREE,
 INDEX idx_seller_id (seller_id) USING BTREE,
 INDEX idx_mer_update_time (mer_update_time) USING BTREE,
+INDEX idx_mer_img_identify (mer_img_identify) USING BTREE,
 INDEX idx_mer_status (mer_status) USING BTREE
 )ENGINE = InnoDB AUTO_INCREMENT=1000 DEFAULT CHARSET=utf8 COMMENT='商品表';
 
@@ -109,18 +126,36 @@ INDEX idx_is_default (is_default) USING BTREE,
 INDEX idx_receipt_address_update_time (receipt_address_update_time) USING BTREE
 )ENGINE = InnoDB AUTO_INCREMENT=1000 DEFAULT CHARSET=utf8 COMMENT='收货地址表 ';
 
+#创建拼团配置表
+CREATE TABLE group_pugin_tb(
+group_pugin_id int(11) NOT NULL AUTO_INCREMENT COMMENT '拼团配置id',
+mer_group_discount decimal(10,2) COMMENT '拼团折扣',
+mer_group_price decimal(10,2) COMMENT '拼团价格',
+open_person int(11) COMMENT '开团人数',
+group_discount tinyint(4) COMMENT '团长佣金比例',
+group_commission decimal(10,2) COMMENT '团长佣金',
+is_free tinyint(4) COMMENT '是否免单0,不免， 1,免单',
+mer_id int(11) COMMENT '商品id,外键',
+PRIMARY KEY (group_pugin_id),
+CONSTRAINT FK_MER_GROUPPUGIN FOREIGN KEY (mer_id) REFERENCES mer_tb (mer_id) ON DELETE CASCADE ON UPDATE CASCADE,
+INDEX idx_mer_id (mer_id) USING BTREE
+)ENGINE = InnoDB AUTO_INCREMENT=1000 DEFAULT CHARSET=utf8 COMMENT='拼团配置表';
+
 #创建拼团表
 CREATE TABLE fight_group_tb(
 fight_group_id int(11) NOT NULL AUTO_INCREMENT COMMENT '拼团id',
-open_num int(11) COMMENT '开团次数',
-join_num int(11) COMMENT '参团人数',
-success_num int(11) COMMENT '已经成团次数',
-faile_num int(11) COMMENT '已经拼团失败次数',
-performance decimal(10,2) COMMENT '业绩',
-commission decimal(10,2) COMMENT '获得佣金',
-free_num int(11) COMMENT '免单次数',
-user_id int(11) COMMENT '用户id,外键',
+open_person int(11) COMMENT '开团人数',
+join_person int(11) COMMENT '已参团人数',
+mer_group_discount tinyint(4) COMMENT '团长佣金比例',
+mer_group_commission decimal(10,2) COMMENT '团长佣金',
+is_free tinyint(4) COMMENT '是否免单0,不免， 1,免单',
+open_group_time timestamp DEFAULT CURRENT_TIMESTAMP COMMENT '开团时间',
+is_success tinyint(4) COMMENT '是否成功 0,失败， 1,成功',
+mer_id int(11) COMMENT '商品id,外键',
+mer_group_id int(11) COMMENT '拼团队长id,外键',
 PRIMARY KEY (fight_group_id),
-CONSTRAINT FK_USER_FIGHTGROUP FOREIGN KEY (user_id) REFERENCES user_tb (user_id) ON DELETE CASCADE ON UPDATE CASCADE,
-INDEX idx_user_id (user_id) USING BTREE
+CONSTRAINT FK_MER_FIGHTGROUP FOREIGN KEY (mer_id) REFERENCES mer_tb (mer_id) ON DELETE CASCADE ON UPDATE CASCADE,
+CONSTRAINT FK_MERGROUP_FIGHTGROUP FOREIGN KEY (mer_group_id) REFERENCES mer_group_tb (mer_group_id) ON DELETE CASCADE ON UPDATE CASCADE,
+INDEX idx_mer_id (mer_id) USING BTREE,
+INDEX idx_mer_group_id (mer_group_id) USING BTREE
 )ENGINE = InnoDB AUTO_INCREMENT=1000 DEFAULT CHARSET=utf8 COMMENT='拼团表';

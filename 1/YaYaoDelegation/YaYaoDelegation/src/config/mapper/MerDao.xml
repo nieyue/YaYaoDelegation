@@ -7,21 +7,21 @@
 <insert id="addMer" parameterType="Mer" flushCache="true"  >  
    INSERT IGNORE INTO
    		mer_tb 
-   		 (mer_thumb_img,mer_title,mer_person,mer_old_price,mer_price,mer_stock,mer_code,
+   		 (mer_thumb_img,mer_title,mer_old_price,fight_group_id,mer_stock,mer_code,
    		 <if test="merDiscount!=null">mer_discount,</if>
    		 <if test="merPostage!=null">mer_postage,</if>
    		 <if test="merUpdateTime!=null">mer_update_time,</if>
    		 <if test="merStatus!=null">mer_status,</if>
    		 <if test="merCateId!=null">mer_cate_id,</if>
-   		 seller_id)
+   		 seller_id,mer_img_identify)
    VALUES
-    	 (#{merThumbImg},#{merTitle},#{merPerson},#{merOldPrice},#{merPrice},#{merStock},#{merCode},
+    	 (#{merThumbImg},#{merTitle},#{merOldPrice},#{merPrice},#{merStock},#{merCode},
     	 <if test="merDiscount!=null">#{merDiscount},</if>
     	 <if test="merPostage!=null">#{merPostage},</if>
     	 <if test="merUpdateTime!=null">#{merUpdateTime},</if>
     	 <if test="merStatus!=null">#{merStatus},</if>
     	 <if test="merCateId!=null">#{merCateId},</if>
-    	 #{sellerId})  
+    	 #{sellerId},#{merImgIdentify})  
 </insert>  
 <!-- 更新商品 -->
 <update id="updateMer" parameterType="Mer" >  
@@ -30,7 +30,6 @@
     SET 
     	mer_thumb_img=#{merThumbImg},
     	mer_title=#{merTitle},
-    	mer_person=#{merPerson},
     	mer_old_price=#{merOldPrice},
     	mer_price=#{merPrice},
     	mer_stock=#{merStock},
@@ -40,7 +39,8 @@
     	mer_update_time=#{merUpdateTime},
     	mer_status=#{merStatus},
     	mer_cate_id=#{merCateId},
-    	seller_id=#{sellerId}
+    	seller_id=#{sellerId},
+    	mer_img_identify=#{merImgIdentify}
     WHERE
     	 mer_id=#{merId}
     AND seller_id=#{sellerId}  
@@ -58,7 +58,6 @@ SELECT
 	 mer_id,
 	 mer_thumb_img,
      mer_title,
-     mer_person,
      mer_old_price,
      mer_price,
      mer_stock,
@@ -68,7 +67,8 @@ SELECT
      mer_update_time,
      mer_status,
      mer_cate_id,
-     seller_id
+     seller_id,
+     mer_img_identify
 FROM mer_tb 
 WHERE mer_id=#{merId}
 </select>
@@ -78,7 +78,6 @@ WHERE mer_id=#{merId}
 	       mer_id,
 		   mer_thumb_img,
 		   mer_title,
-		   mer_person,
 		   mer_old_price,
 		   mer_price,
 		   mer_stock,
@@ -88,7 +87,8 @@ WHERE mer_id=#{merId}
 		   mer_update_time,
 		   mer_status,
 		   mer_cate_id,
-		   seller_id
+		   seller_id,
+		   mer_img_identify
 	FROM mer_tb
 	WHERE mer_status=#{merStatus}
 	AND seller_id=#{sellerId}
@@ -103,7 +103,6 @@ WHERE mer_id=#{merId}
        mer_id,
 	   mer_thumb_img,
 	   mer_title,
-	   mer_person,
 	   mer_old_price,
 	   mer_price,
 	   mer_stock,
@@ -113,7 +112,8 @@ WHERE mer_id=#{merId}
 	   mer_update_time,
 	   mer_status,
 	   mer_cate_id,
-	   seller_id
+	   seller_id,
+	   mer_img_identify
 	FROM mer_tb
 	WHERE mer_status=#{merStatus}
 	AND seller_id=#{sellerId}
@@ -126,7 +126,6 @@ WHERE mer_id=#{merId}
        mer_id,
 	   mer_thumb_img,
 	   mer_title,
-	   mer_person,
 	   mer_old_price,
 	   mer_price,
 	   mer_stock,
@@ -136,7 +135,8 @@ WHERE mer_id=#{merId}
 	   mer_update_time,
 	   mer_status,
 	   mer_cate_id,
-	   seller_id  
+	   seller_id,
+	   mer_img_identify  
 	FROM mer_tb
 	WHERE 
 	mer_title LIKE '%' #{merTitle} '%'
@@ -150,6 +150,27 @@ WHERE mer_id=#{merId}
 	FROM mer_tb
 	WHERE mer_status=#{merStatus}
 	AND seller_id=#{sellerId}
+</select>   
+<!-- 根据商品图片标识装载指定的商品 -->
+<select id="loadMerByMerImgIdentify" parameterType="String"  resultType="Mer">  
+	SELECT
+       mer_id,
+	   mer_thumb_img,
+	   mer_title,
+	   mer_old_price,
+	   mer_price,
+	   mer_stock,
+	   mer_code,
+	   mer_discount,
+	   mer_postage,
+	   mer_update_time,
+	   mer_status,
+	   mer_cate_id,
+	   seller_id,
+	   mer_img_identify  
+	FROM mer_tb
+	WHERE 
+	mer_img_identify =#{merImgIdentify}
 </select>    
  
 </mapper>

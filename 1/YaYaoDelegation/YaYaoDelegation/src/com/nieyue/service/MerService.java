@@ -17,6 +17,8 @@ public interface MerService {
 	public boolean updateMer(Mer mer);
 	/** 装载指定的商品 */	
 	public Mer loadMer(Integer merId);	
+	/** 根据商品图片标识装载指定的商品 */	
+	public Mer loadMerByMerImgIdentify(String merImgIdentify);	
 	/** 根据商家浏览商品 */
 	public List<Mer> browseMerBySeller(Integer sellerId, Integer merStatus,String orderName,String orderWay);
 	/** 分页浏览商品 */

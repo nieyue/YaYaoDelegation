@@ -38,7 +38,7 @@ public class MerDaoTest {
 			}
 		mer.setMerThumbImg("/resources/sellerUpload/7/黑茶/百两茶/百两茶_"+(i+4)+".jpg");
 		mer.setMerTitle("百两茶"+(i+4));
-		mer.setMerPerson(2);
+		//mer.setFightGroupId(null);
 		mer.setMerOldPrice(55.00);
 		mer.setMerPrice(50.00);
 		mer.setMerStock(999);

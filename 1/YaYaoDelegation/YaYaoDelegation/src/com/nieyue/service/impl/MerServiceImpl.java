@@ -100,5 +100,14 @@ public class MerServiceImpl implements MerService {
 		int c = merDao.countRecordBySeller(sellerId,merStatus);
 		return c;
 	}
+	/** 
+	 * 根据商品图片标识装载指定的商品 
+	 * 
+	 */	
+	@Override
+	public Mer loadMerByMerImgIdentify(String merImgIdentify) {
+		Mer m = merDao.loadMerByMerImgIdentify(merImgIdentify);
+		return m;
+	}
 	
 }

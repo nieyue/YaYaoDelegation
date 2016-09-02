@@ -19,6 +19,8 @@ public interface MerDao {
 	public boolean updateMer(Mer mer);
 	/** 装载指定的商品 */	
 	public Mer loadMer(Integer merId);	
+	/** 根据商品图片标识装载指定的商品 */	
+	public Mer loadMerByMerImgIdentify(String merImgIdentify);	
 	/** 根据商家浏览商品 */
 	public List<Mer> browseMerBySeller(@Param("sellerId") Integer sellerId,@Param("merStatus") Integer merStatus,@Param("orderName")String orderName,@Param("orderWay")String orderWay);
 	/** 分页浏览商品 */

@@ -358,8 +358,26 @@
         					});
         					});
         				};
+        				//商品原始价格变动
+        				$scope.$watch("addMerOldPrice",function(){
+        					if($scope.addMerOldPrice && $scope.addMerDiscount){
+        					$scope.addMerPrice=parseInt(($scope.addMerOldPrice)*($scope.addMerDiscount)*100)/100;
+        					}
+        				});
+        				//商品折扣价格变动
+        				$scope.$watch("addMerDiscount",function(){
+        					if($scope.addMerOldPrice && $scope.addMerDiscount){
+        						$scope.addMerPrice=parseInt(($scope.addMerOldPrice)*($scope.addMerDiscount)*100)/100;
+        					}
+        				});
         				//添加商品
         				$scope.addMerSubmit=function(){
+        					if($(".drag-mer-img-warp").length<=0){
+        						return myUtils.myLoadingToast("商品图片还没添加", null);
+        					}
+        					
+        					if($scope.addMerForm.$valid){
+        						$scope.addMerForm.$invalid=true;
         					$.ajax({
         						url:"/mer/add",
         						data:{
@@ -398,6 +416,7 @@
         						}
         						
         					});
+        					}
         				};
         			}
         		} 

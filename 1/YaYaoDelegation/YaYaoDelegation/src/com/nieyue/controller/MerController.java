@@ -4,6 +4,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
@@ -11,7 +12,6 @@ import javax.servlet.http.HttpSession;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
-import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -80,8 +80,11 @@ public class MerController {
 	 */
 	@RequestMapping(value = "/add", method = {RequestMethod.GET,RequestMethod.POST})
 	public @ResponseBody StateResult addMer(@ModelAttribute Mer mer, @RequestParam("merImgList") String merImgList,  HttpSession session) throws IllegalAccessException, InvocationTargetException, ParseException  {
+		String merImgIdentify=UUID.randomUUID().toString().replace("-", "");
+		mer.setMerImgIdentify(merImgIdentify);
 		boolean am = merService.addMer(mer);
 		if(am){
+			mer=merService.loadMerByMerImgIdentify(merImgIdentify);
 			JSONArray json=JSONArray.fromObject(merImgList);
 			for (int i = 0; i < json.size(); i++) {
 				MerImg merImg = new MerImg();
