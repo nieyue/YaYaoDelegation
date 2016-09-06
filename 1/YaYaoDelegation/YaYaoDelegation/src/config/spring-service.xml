@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xmlns:util="http://www.springframework.org/schema/util"
   xmlns="http://www.springframework.org/schema/beans" xmlns:aop="http://www.springframework.org/schema/aop"
   xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
   xsi:schemaLocation="http://www.springframework.org/schema/beans 
@@ -9,7 +10,9 @@
      http://www.springframework.org/schema/context
      http://www.springframework.org/schema/context/spring-context-4.2.xsd
      http://www.springframework.org/schema/tx
-     http://www.springframework.org/schema/tx/spring-tx-4.2.xsd">  
+     http://www.springframework.org/schema/tx/spring-tx-4.2.xsd
+     http://www.springframework.org/schema/util
+        http://www.springframework.org/schema/util/spring-util-4.2.xsd">  
      <!-- <import resource="spring-dao.xml"/>  -->
     <!-- 国际化的消息资源文件
         <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">  
@@ -24,6 +27,9 @@
             <property name="cacheSeconds" value="60"/>  
         </bean>  
                     -->
+                    
+      
+      <!--事务 -->        	
 	<bean id="txManager"
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource"  ref="dataSource"/>
@@ -66,4 +72,31 @@
         <aop:pointcut id="txPointcut" expression="execution(* com.nieyue.service..*.*(..))" />
         <aop:advisor pointcut-ref="txPointcut" advice-ref="txAdvice"/>
     </aop:config> 
+    
+    <!--redis -->
+ <bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
+    	
+        <property name="maxTotal" value="${redis.maxTotal}" />
+        <property name="maxIdle" value="${redis.maxIdle}" />
+        <property name="maxWaitMillis" value="${redis.maxWaitMillis}" />
+        <property name="testOnBorrow" value="${redis.testOnBorrow}"/>
+        <property name="testOnReturn" value="${redis.testOnReturn}"/>
+    </bean>
+
+    <bean id="shardedJedisPool" class="redis.clients.jedis.ShardedJedisPool"  scope="singleton" >
+        <constructor-arg index="0" ref="jedisPoolConfig" />
+        <constructor-arg index="1">
+            <list>
+                <bean class="redis.clients.jedis.JedisShardInfo">
+                	<property name="password" value="${redis.password}"></property>
+                	<property name="connectionTimeout" value="${redis.timeout}"></property>
+                    <constructor-arg name="host" value="${redis.host}" />
+                    <constructor-arg name="port" value="${redis.port}" />
+                    <constructor-arg name="name" value="${redis.name}" />
+                </bean>
+            </list>
+        </constructor-arg>
+    </bean>
  	</beans>
+ 	
+ 	

@@ -319,5 +319,6 @@
   		<bean id="ehcacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean"
   		 p:config-location="classpath:config/ehcache.xml" p:shared="true"/>
  -->
+	
  	
 </beans>

@@ -13,6 +13,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 
 import com.nieyue.bean.MerImg;
+import com.nieyue.redis.RedisClientTemplate;
 import com.nieyue.service.MerImgService;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations={"classpath:config/spring-dao.xml","classpath:config/spring-service.xml"})
@@ -70,11 +71,14 @@ public class MerImgServiceImplTest {
 		List<MerImg> l = merImgService.browsePagingMerImgBySeller(23,1003, 0, -1, "mer_img_update_time", "desc");
 		System.out.println(l);
 	}
-
+	@Resource
+	RedisClientTemplate redisClientTemplate;
 	@Test
 	public void testLoadMerImgByAddress() {
-		MerImg merImg = merImgService.loadMerImgByAddress("sdfdsf1");
-		System.out.println(merImg.getMerImgId());
+		//MerImg merImg = merImgService.loadMerImgByAddress("sdfdsf1");
+		//System.out.println(merImg.getMerImgId());
+		 //redisClientTemplate.set("a", "abc");
+	        System.out.println(redisClientTemplate.get("a"));
 	}
 
 }

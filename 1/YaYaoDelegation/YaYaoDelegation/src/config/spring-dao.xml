@@ -19,8 +19,14 @@
    </context:component-scan>
      <!-- 配置数据源  -->
     <!-- <context:property-placeholder location="classpath:config/jdbc.properties"/> -->
-    <bean  class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">         
-    <property name="location" value="classpath:config/jdbc.properties"/>         
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">         
+    <property name="locations">  
+        <list>  
+            <value>classpath:config/jdbc.properties</value>  
+            <value>classpath:config/redis.properties</value>  
+        </list>  
+    </property>  
+    <property name="ignoreUnresolvablePlaceholders" value="true" />   
 </bean> 
     <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" >
         <!-- 加载数据库驱动及用户名等基本信息 -->
@@ -59,4 +65,5 @@
    		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property> 
 		<property name="basePackage" value="com.nieyue.dao"/>
   </bean>
+  
 </beans>
